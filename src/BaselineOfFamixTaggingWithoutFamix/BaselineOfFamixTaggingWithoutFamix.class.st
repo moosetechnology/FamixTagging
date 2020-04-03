@@ -29,7 +29,7 @@ BaselineOfFamixTaggingWithoutFamix >> baseline: spec [
 				package: 'Famix-Tagging' with: [ spec requires: #('MaterialColors') ];
 				package: 'Famix-Tagging-Code' with: [ spec requires: #('Famix-Tagging') ];
 				package: 'Famix-Tagging-Tests-Generator';
-				package: 'Famix-Tagging-Tests-Entities' with: [ spec requires: #('FamixTraits') ];
+				package: 'Famix-Tagging-Tests-Entities';
 				package: 'Famix-Tagging-Tests' with: [ spec requires: #('Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities') ].
 
 			"Groups"
