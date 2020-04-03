@@ -13,13 +13,15 @@ BaselineOfFamixTagging >> baseline: spec [
 	spec
 		for: #common
 		do: [ "Dependencies"
-			self materialColor: spec.
+			self
+				famix: spec;
+				materialColor: spec.
 
 			"Packages"
 			spec
-				package: 'Famix-Tagging' with: [ spec requires: #('MaterialColors') ];
-				package: 'Famix-Tagging-Code' with: [ spec requires: #('Famix-Tagging') ];
-				package: 'Famix-Tagging-Tests-Generator';
+				package: 'Famix-Tagging' with: [ spec requires: #('MaterialColors' 'Famix') ];
+				package: 'Famix-Tagging-Code' with: [ spec requires: #('Famix-Tagging' 'FamixTraits') ];
+				package: 'Famix-Tagging-Tests-Generator' with: [ spec requires: #('FamixGenerator') ];
 				package: 'Famix-Tagging-Tests-Entities' with: [ spec requires: #('FamixTraits') ];
 				package: 'Famix-Tagging-Tests' with: [ spec requires: #('Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities') ].
 
@@ -27,23 +29,7 @@ BaselineOfFamixTagging >> baseline: spec [
 			spec
 				group: 'TaggingMinimal' with: #('Famix-Tagging');
 				group: 'Tagging' with: #('TaggingMinimal' 'Famix-Tagging-Code');
-				group: 'TaggingTests' with: #('Famix-Tagging-Tests') ].
-
-	spec
-		for: #(#WithoutFamix)
-		do: [ self famix: spec.
-			spec
-				package: 'Famix-Tagging' with: [ spec requires: #('Famix') ];
-				package: 'Famix-Tagging-Code' with: [ spec requires: #('FamixTraits') ];
-				package: 'Famix-Tagging-Tests-Generator' with: [ spec requires: #('FamixGenerator') ] ]
-]
-
-{ #category : #accessing }
-BaselineOfFamixTagging >> customProjectAttributes [
-    self class environment at: #BaselineOfFamixs ifAbsent: [ ^ #(#WithoutFamix) ].
-
-    ^ #()
-
+				group: 'TaggingTests' with: #('Famix-Tagging-Tests') ]
 ]
 
 { #category : #dependencies }
