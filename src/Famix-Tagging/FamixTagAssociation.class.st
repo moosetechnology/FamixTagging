@@ -180,6 +180,11 @@ FamixTagAssociation >> stonMapForTagModel: aTagModel [
 		yourself
 ]
 
+{ #category : #ston }
+FamixTagAssociation >> stonOn: stonWriter [
+	stonWriter writeObject: self do: [ stonWriter encodeMap: (self stonMapForTagModel: stonWriter tagModel) ]
+]
+
 { #category : #accessing }
 FamixTagAssociation >> tag [
 	<MSEProperty: #tag type: #FamixTag>
