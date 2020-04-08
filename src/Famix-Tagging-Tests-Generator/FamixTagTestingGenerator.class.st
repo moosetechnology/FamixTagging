@@ -14,11 +14,6 @@ Class {
 	#category : #'Famix-Tagging-Tests-Generator'
 }
 
-{ #category : #testing }
-FamixTagTestingGenerator class >> isRealMetamodel [
-	^ false
-]
-
 { #category : #accessing }
 FamixTagTestingGenerator class >> packageName [
 	^ #'Famix-Tagging-Tests-Entities'
@@ -27,6 +22,11 @@ FamixTagTestingGenerator class >> packageName [
 { #category : #accessing }
 FamixTagTestingGenerator class >> prefix [
 	^ #FamixTagTest
+]
+
+{ #category : #testing }
+FamixTagTestingGenerator class >> shouldBeUpToDateInLatestMoose [
+	^ false
 ]
 
 { #category : #accessing }
