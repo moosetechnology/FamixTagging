@@ -42,6 +42,13 @@ FamixTagTestEntity >> isAttribute [
 ]
 
 { #category : #testing }
+FamixTagTestEntity >> isBehavioural [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTagTestEntity >> isClass [
 
 	<generated>

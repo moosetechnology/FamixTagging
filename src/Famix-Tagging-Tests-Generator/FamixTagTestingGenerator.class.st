@@ -14,6 +14,11 @@ Class {
 	#category : #'Famix-Tagging-Tests-Generator'
 }
 
+{ #category : #testing }
+FamixTagTestingGenerator class >> isRealMetamodel [
+	^ false
+]
+
 { #category : #accessing }
 FamixTagTestingGenerator class >> packageName [
 	^ #'Famix-Tagging-Tests-Entities'
