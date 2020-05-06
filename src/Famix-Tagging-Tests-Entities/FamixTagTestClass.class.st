@@ -16,14 +16,6 @@ FamixTagTestClass class >> annotation [
 ]
 
 { #category : #ambiguous }
-FamixTagTestClass >> numberOfLinesOfCode [
-	<FMProperty: #numberOfLinesOfCode type: #Number>
-	<derived>
-	<FMComment: 'The number of lines of code in a class'>
-	^ self lookUpPropertyNamed: #numberOfLinesOfCode computedAs: [ self methodsGroup sumNumbers: #numberOfLinesOfCode ]
-]
-
-{ #category : #ambiguous }
 FamixTagTestClass >> numberOfLinesOfCode: aNumber [
 
 	self privateState propertyAt: #numberOfLinesOfCode put: aNumber
