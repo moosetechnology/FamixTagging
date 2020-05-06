@@ -75,6 +75,5 @@ FamixTagTestingGenerator >> defineHierarchy [
 	package --|> #TWithTypes.
 	package --|> #TNamedEntity.
 
-	sourceTextAnchor --|> #TSourceAnchor.
 	sourceTextAnchor --|> #THasImmediateSource
 ]
