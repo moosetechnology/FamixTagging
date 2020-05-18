@@ -120,6 +120,13 @@ FamixTag >> addSubTag: aTag [
 	aTag resetMooseName
 ]
 
+{ #category : #dependencies }
+FamixTag >> allClientsIn: aMooseGroup [
+	"The tags should know in which model look for the tagged entities. Thus, #allClientsIn:forModel: should be used."
+
+	^ self shouldNotImplement
+]
+
 { #category : #iterating }
 FamixTag >> allEntitiesRecursivelyIn: aMooseModel [
 	"Compute _set_ of all entities in the tag and its sub-tags"
@@ -148,6 +155,13 @@ FamixTag >> allParentTags [
 	^ self parentTag
 		ifNil: [ #() ]
 		ifNotNil: [ :tag | {tag} , tag allParentTags ]
+]
+
+{ #category : #dependencies }
+FamixTag >> allProvidersIn: aMooseGroup [
+	"The tags should know in which model look for the tagged entities. Thus, #allProvidersIn:forModel: should be used."
+
+	^ self shouldNotImplement
 ]
 
 { #category : #accessing }
@@ -245,6 +259,11 @@ FamixTag >> description: aDescription [
 	description := aDescription
 ]
 
+{ #category : #dependencies }
+FamixTag >> detectDependenciesUsing: aDetector [
+	aDetector detectDependenciesFrom: aDetector potentialDependencies
+]
+
 { #category : #comparing }
 FamixTag >> equivalentTo: anotherEntity [
 	^ self name = anotherEntity name
@@ -309,6 +328,23 @@ FamixTag >> isAncestorOf: aTag [
 { #category : #testing }
 FamixTag >> isComposite [
 	^ self subTags isNotEmpty
+]
+
+{ #category : #dependencies }
+FamixTag >> isInListOfPossibleLinks: aCollection forModel: aMooseModel [
+	^ aCollection includesAny: (self allTaggedEntitiesInModel: aMooseModel)
+]
+
+{ #category : #dependencies }
+FamixTag >> isLinkedTo: aTagOrEntity dependancyDirection: aDirectionStrategy in: aMooseModel [
+	| dependencies |
+	dependencies := self allEntitiesRecursivelyIn: aMooseModel flatCollect: [ :entity | aDirectionStrategy dependenciesAtReceiverScopeOf: entity ].
+
+	"In the entity is a MooseEntity, with check if it is in its dependencies. 
+	If it is a tag, we look in the tags of its dependencies and the parents of those tags."
+	^ (aTagOrEntity isTag
+		ifTrue: [ dependencies flatCollectAsSet: [ :entity | entity tags , entity tags flatCollect: #allParentTags ] ]
+		ifFalse: [ dependencies ]) includes: aTagOrEntity
 ]
 
 { #category : #testing }

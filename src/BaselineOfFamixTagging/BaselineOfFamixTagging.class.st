@@ -23,7 +23,7 @@ BaselineOfFamixTagging >> baseline: spec [
 				package: 'Famix-Tagging-Code' with: [ spec requires: #('Famix-Tagging' 'FamixTraits') ];
 				package: 'Famix-Tagging-Tests-Generator' with: [ spec requires: #('FamixGenerator') ];
 				package: 'Famix-Tagging-Tests-Entities' with: [ spec requires: #('FamixTraits') ];
-				package: 'Famix-Tagging-Tests' with: [ spec requires: #('Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities') ].
+				package: 'Famix-Tagging-Tests' with: [ spec requires: #('FamixTestModels' 'Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities') ].
 
 			"Groups"
 			spec
@@ -40,7 +40,8 @@ BaselineOfFamixTagging >> famix: spec [
 				loads: 'Minimal';
 				repository: 'github://moosetechnology/Moose:development/src' ];
 		project: 'FamixTraits' copyFrom: 'Famix' with: [ spec loads: 'BasicTraits' ];
-		project: 'FamixGenerator' copyFrom: 'Famix' with: [ spec loads: 'Basic' ]
+		project: 'FamixGenerator' copyFrom: 'Famix' with: [ spec loads: 'Basic' ];
+		project: 'FamixTestModels' copyFrom: 'Famix' with: [ spec loads: 'TestModels' ]
 ]
 
 { #category : #dependencies }
