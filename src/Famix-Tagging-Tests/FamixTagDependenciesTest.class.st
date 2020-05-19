@@ -9,11 +9,11 @@ Class {
 
 { #category : #running }
 FamixTagDependenciesTest >> addDependencies [
-	self method1 addOutgoingInvocation: (FamixTagTestInvocation new addCandidate: self method2).
+	FamixTagTestInvocation source: self method1 target: {self method2}.
 
-	self method1 addAccess: (FamixTagTestAccess new variable: (model entityNamed: 'Package3::Class3.Attribute3')).
+	FamixTagTestAccess source: self method1 target: (model entityNamed: 'Package3::Class3.Attribute3').
 
-	self method2 addOutgoingInvocation: (FamixTagTestInvocation new addCandidate: self method1)
+	FamixTagTestInvocation source: self method2 target: {self method1}
 ]
 
 { #category : #running }
@@ -65,6 +65,16 @@ FamixTagDependenciesTest >> tagEntities [
 	(model entityNamed: 'Package3::Class3.Attribute3') tagWith: classTag
 ]
 
+{ #category : #accessing }
+FamixTagDependenciesTest >> tagNamed: aString [
+	^ model tags detect: [ :tag | tag name = aString ]
+]
+
+{ #category : #running }
+FamixTagDependenciesTest >> testClientsTagFromCompositeTag [
+	self assert: ((self tagNamed: 'classTag2') allClientsIn: {(self tagNamed: 'compositeTag1')} forModel: model) size equals: 1
+]
+
 { #category : #tests }
 FamixTagDependenciesTest >> testNumberOfLinesOfCode [
 	| compositeTag |
@@ -76,4 +86,9 @@ FamixTagDependenciesTest >> testNumberOfLinesOfCode [
 
 	self assert: (compositeTag allEntitiesRecursivelyIn: model collect: #numberOfLinesOfCode) sumNumbers equals: 15.
 	self assert: ((model tagNamed: 'compositeTag1>classTag1') allEntitiesRecursivelyIn: model collect: #numberOfLinesOfCode) sumNumbers equals: 10
+]
+
+{ #category : #running }
+FamixTagDependenciesTest >> testProviderTagToCompositeTag [
+	self assert: ((self tagNamed: 'classTag1') allProvidersIn: {(self tagNamed: 'compositeTag2')} forModel: model) size equals: 1
 ]

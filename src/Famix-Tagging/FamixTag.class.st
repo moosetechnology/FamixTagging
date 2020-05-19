@@ -343,7 +343,7 @@ FamixTag >> isLinkedTo: aTagOrEntity dependancyDirection: aDirectionStrategy in:
 	"In the entity is a MooseEntity, with check if it is in its dependencies. 
 	If it is a tag, we look in the tags of its dependencies and the parents of those tags."
 	^ (aTagOrEntity isTag
-		ifTrue: [ dependencies flatCollectAsSet: [ :entity | entity tags , entity tags flatCollect: #allParentTags ] ]
+		ifTrue: [ dependencies flatCollectAsSet: [ :entity | entity tags , (entity tags flatCollect: #allParentTags) ] ]
 		ifFalse: [ dependencies ]) includes: aTagOrEntity
 ]
 
