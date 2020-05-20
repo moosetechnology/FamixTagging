@@ -2,7 +2,7 @@ Extension { #name : #MooseEntityState }
 
 { #category : #'*Famix-Tagging' }
 MooseEntityState >> removeTagProperties [
-	"When we remove a tag we want to flush all caches relative to tags."
+	"I am used when we remove tags to update the caches"
 
-	self subclassResponsibility
+	cache keysAndValuesRemove: [ :key :value | key asString includesSubstring: 'FamixTag' ]
 ]

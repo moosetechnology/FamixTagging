@@ -390,7 +390,7 @@ FamixTag >> mooseName [
 	"A tag should always have a model. Thus we can remove the check in the overriden method for performances."
 
 	^ self privateState
-		propertyAt: #mooseName
+		cacheAt: #mooseName
 		ifAbsentPut: [ | stream |
 			stream := (String new: 64) writeStream.
 			self mooseNameOn: stream.

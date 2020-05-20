@@ -17,6 +17,5 @@ FamixTagTestClass class >> annotation [
 
 { #category : #ambiguous }
 FamixTagTestClass >> numberOfLinesOfCode: aNumber [
-
-	self privateState propertyAt: #numberOfLinesOfCode put: aNumber
+	self privateState cacheAt: #numberOfLinesOfCode put: aNumber
 ]
