@@ -176,6 +176,11 @@ FamixTag >> allTaggedEntitiesInModel: aModel [
 		yourself
 ]
 
+{ #category : #dependencies }
+FamixTag >> canRecursivelyBeItsParent [
+	^ true
+]
+
 { #category : #accessing }
 FamixTag >> categories [
 	<MSEProperty: #categories type: #FamixTagCategory opposite: #markedTags> <multivalued> 
