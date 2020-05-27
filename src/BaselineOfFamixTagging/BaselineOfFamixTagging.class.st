@@ -38,7 +38,7 @@ BaselineOfFamixTagging >> famix: spec [
 		baseline: 'Famix'
 			with: [ spec
 				loads: 'Minimal';
-				repository: 'github://moosetechnology/Moose:development/src' ];
+				repository: 'github://moosetechnology/Famix:development/src' ];
 		project: 'FamixTraits' copyFrom: 'Famix' with: [ spec loads: 'BasicTraits' ];
 		project: 'FamixGenerator' copyFrom: 'Famix' with: [ spec loads: 'Basic' ];
 		project: 'FamixTestModels' copyFrom: 'Famix' with: [ spec loads: 'TestModels' ]
