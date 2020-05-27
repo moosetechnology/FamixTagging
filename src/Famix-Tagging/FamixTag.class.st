@@ -49,7 +49,7 @@ Class {
 
 { #category : #meta }
 FamixTag class >> annotation [
-	<MSEClass: #Tag super: #MooseEntity>
+	<FMClass: #Tag super: #MooseEntity>
 	<package: #Tagging>
 ]
 
@@ -183,8 +183,8 @@ FamixTag >> canRecursivelyBeItsParent [
 
 { #category : #accessing }
 FamixTag >> categories [
-	<MSEProperty: #categories type: #FamixTagCategory opposite: #markedTags> <multivalued> 
-	<MSEComment: 'categories this tag is marked in'>
+	<FMProperty: #categories type: #FamixTagCategory opposite: #markedTags> <multivalued> 
+	<FMComment: 'categories this tag is marked in'>
 	^ categories
 ]
 
@@ -214,10 +214,10 @@ FamixTag >> checkValidity [
 
 { #category : #accessing }
 FamixTag >> children [
-	<MSEProperty: #children type: #FamixTag >
+	<FMProperty: #children type: #FamixTag >
 	<multivalued>
 	<derived>
-	<MSEComment: 'children tags of this composite tag'>
+	<FMComment: 'children tags of this composite tag'>
 	^ self subTags 
 ]
 
@@ -254,8 +254,8 @@ FamixTag >> deleteAssociationsInModel: aMooseModel [
 
 { #category : #accessing }
 FamixTag >> description [
-	<MSEProperty: #description type: #String>
-	<MSEComment: 'Description for the tag'>
+	<FMProperty: #description type: #String>
+	<FMComment: 'Description for the tag'>
 	^ description
 ]
 
@@ -301,8 +301,8 @@ FamixTag >> hasUniqueMooseNameInModel [
 
 { #category : #accessing }
 FamixTag >> id [
-	<MSEProperty: #id type: #Number>
-	<MSEComment: 'This id is unique and all associations point it'>
+	<FMProperty: #id type: #Number>
+	<FMComment: 'This id is unique and all associations point it'>
 	^ id
 ]
 
@@ -413,8 +413,8 @@ FamixTag >> mooseNameOn: aStream [
 
 { #category : #accessing }
 FamixTag >> name [
-	<MSEProperty: #name type: #String>
-	<MSEComment: 'Name of the tag'>
+	<FMProperty: #name type: #String>
+	<FMComment: 'Name of the tag'>
 	^ name
 ]
 
@@ -430,8 +430,8 @@ FamixTag >> parentSeparator [
 
 { #category : #accessing }
 FamixTag >> parentTag [
-	<MSEProperty: #parentTag type: #FamixTag opposite: #subTags>
-	<MSEComment: 'Parent of the tag'>
+	<FMProperty: #parentTag type: #FamixTag opposite: #subTags>
+	<FMComment: 'Parent of the tag'>
 	^ parentTag
 ]
 
@@ -500,8 +500,8 @@ FamixTag >> removeFromModel [
 FamixTag >> serializedColor [
 	"Never use directly this instance variable; it is just to store the color in the model that only support string and not color type"
 
-	<MSEProperty: #serializedColor type: #String>
-	<MSEComment: 'Name of the method'>
+	<FMProperty: #serializedColor type: #String>
+	<FMComment: 'Name of the method'>
 	^ serializedColor
 ]
 
@@ -554,8 +554,8 @@ FamixTag >> subTagNamed: aString [
 
 { #category : #accessing }
 FamixTag >> subTags [
-	<MSEProperty: #subTags type: #FamixTag opposite: #parentTag> <multivalued>
-	<MSEComment: 'Sub tags of this composite tag.'>
+	<FMProperty: #subTags type: #FamixTag opposite: #parentTag> <multivalued>
+	<FMComment: 'Sub tags of this composite tag.'>
 	^ subTags
 ]
 

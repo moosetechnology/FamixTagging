@@ -30,7 +30,7 @@ Class {
 
 { #category : #meta }
 FamixTagAssociation class >> annotation [
-	<MSEClass: #Association super: #MooseEntity>
+	<FMClass: #Association super: #MooseEntity>
 	<package: #Tagging>
 	<abstract>
 ]
@@ -59,8 +59,8 @@ FamixTagAssociation >> checkingDoubleTagging [
 
 { #category : #accessing }
 FamixTagAssociation >> entity [
-	<MSEProperty: #entity type: #MooseEntity>
-	<MSEComment: 'Tagged entity'>
+	<FMProperty: #entity type: #MooseEntity>
+	<FMComment: 'Tagged entity'>
 	^ entity
 ]
 
@@ -187,9 +187,9 @@ FamixTagAssociation >> stonOn: stonWriter [
 
 { #category : #accessing }
 FamixTagAssociation >> tag [
-	<MSEProperty: #tag type: #FamixTag>
+	<FMProperty: #tag type: #FamixTag>
 	<derived>
-	<MSEComment: 'The tag referenced by the association; because of the link between Tag model and regular MooseModel, the link is weak so be careful using it'>
+	<FMComment: 'The tag referenced by the association; because of the link between Tag model and regular MooseModel, the link is weak so be careful using it'>
 	tag
 		ifNil: [ [ self tagInTagModel: self mooseModel ]
 				on: NotFound
@@ -205,8 +205,8 @@ FamixTagAssociation >> tag: aTag [
 
 { #category : #accessing }
 FamixTagAssociation >> tagId [
-	<MSEProperty: #tagId type: #Number>
-	<MSEComment: 'The moose id of a tag placed on an entity (not directly the tag because it have to work on multi version'>
+	<FMProperty: #tagId type: #Number>
+	<FMComment: 'The moose id of a tag placed on an entity (not directly the tag because it have to work on multi version'>
 	^ tagId
 ]
 

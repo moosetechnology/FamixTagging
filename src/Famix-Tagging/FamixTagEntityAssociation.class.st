@@ -13,7 +13,7 @@ Class {
 
 { #category : #meta }
 FamixTagEntityAssociation class >> annotation [
-	<MSEClass: #EntityAssociation super: #FamixTagAssociation>
+	<FMClass: #EntityAssociation super: #FamixTagAssociation>
 	<package: #Tagging>
 ]
 

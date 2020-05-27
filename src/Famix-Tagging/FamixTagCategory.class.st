@@ -24,7 +24,7 @@ Class {
 
 { #category : #meta }
 FamixTagCategory class >> annotation [
-	<MSEClass: #Category super: #MooseEntity>
+	<FMClass: #Category super: #MooseEntity>
 	<package: #Tagging>
 ]
 
@@ -65,8 +65,8 @@ FamixTagCategory >> initialize [
 
 { #category : #accessing }
 FamixTagCategory >> markedTags [
-	<MSEProperty: #markedTags type: #FamixTag opposite: #categories> <multivalued> 
-	<MSEComment: 'tags this category is marking'>
+	<FMProperty: #markedTags type: #FamixTag opposite: #categories> <multivalued> 
+	<FMComment: 'tags this category is marking'>
 	^ markedTags
 ]
 
@@ -77,8 +77,8 @@ FamixTagCategory >> markedTags: anObject [
 
 { #category : #accessing }
 FamixTagCategory >> name [
-	<MSEProperty: #name type: #String>
-	<MSEComment: 'name of the category of the tag'>
+	<FMProperty: #name type: #String>
+	<FMComment: 'name of the category of the tag'>
 	^ name
 ]
 

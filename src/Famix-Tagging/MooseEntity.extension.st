@@ -38,9 +38,9 @@ MooseEntity >> removeTags [
 
 { #category : #'*Famix-Tagging' }
 MooseEntity >> tagAssociations [
-	<MSEProperty: #tagAssociations type: #FamixTagAssociation opposite: #entity>
+	<FMProperty: #tagAssociations type: #FamixTagAssociation opposite: #entity>
 	<multivalued>
-	<MSEComment: 'All the tag associations linking this entity to a Tag'>
+	<FMComment: 'All the tag associations linking this entity to a Tag'>
 	^ self propertyNamed: #tagAssociations ifAbsentPut: [ FMMultivalueLink on: self opposite: #entity: ]
 ]
 

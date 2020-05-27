@@ -14,7 +14,7 @@ Class {
 
 { #category : #meta }
 FamixTagModel class >> annotation [
-	<MSEClass: #TagModel super: #MooseAbstractGroup>
+	<FMClass: #TagModel super: #MooseAbstractGroup>
 	<package: #Tagging>
 ]
 

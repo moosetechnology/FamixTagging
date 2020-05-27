@@ -26,7 +26,7 @@ Class {
 
 { #category : #meta }
 FamixTagCodeAssociation class >> annotation [
-	<MSEClass: #IntervalAssociation super: #FamixTagAssociation>
+	<FMClass: #IntervalAssociation super: #FamixTagAssociation>
 	<package: #Tagging>
 ]
 
@@ -62,8 +62,8 @@ FamixTagCodeAssociation >> printOn: aStream [
 
 { #category : #accessing }
 FamixTagCodeAssociation >> sourceAnchor [
-	<MSEProperty: #sourceAnchor type: #FamixTSourceAnchor>
-	<MSEComment: 'The tagging for an interval can point a specific source anchor if there is multiple files for an entity'>
+	<FMProperty: #sourceAnchor type: #FamixTSourceAnchor>
+	<FMComment: 'The tagging for an interval can point a specific source anchor if there is multiple files for an entity'>
 	^ sourceAnchor
 ]
 
@@ -74,8 +74,8 @@ FamixTagCodeAssociation >> sourceAnchor: anObject [
 
 { #category : #accessing }
 FamixTagCodeAssociation >> start [
-	<MSEProperty: #start type: #Number>
-	<MSEComment: 'the start position of tagging'>
+	<FMProperty: #start type: #Number>
+	<FMComment: 'the start position of tagging'>
 	
 	^ start
 ]
@@ -87,8 +87,8 @@ FamixTagCodeAssociation >> start: anObject [
 
 { #category : #accessing }
 FamixTagCodeAssociation >> stop [
-	<MSEProperty: #stop type: #Number>
-	<MSEComment: 'the stop position of tagging'>
+	<FMProperty: #stop type: #Number>
+	<FMComment: 'the stop position of tagging'>
 	
 	^ stop
 ]
