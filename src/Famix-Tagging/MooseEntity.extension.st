@@ -9,6 +9,9 @@ MooseEntity >> entityTagAssociations [
 
 { #category : #'*Famix-Tagging' }
 MooseEntity >> isTagged [
+	<FMProperty: #isTagged type: #Boolean>
+	<derived>
+	<FMComment: 'Defines if the entity has at least one tag.'>
 	^ self tagAssociations isNotEmpty
 ]
 
@@ -21,6 +24,9 @@ MooseEntity >> isTaggedWith: aTag [
 MooseEntity >> numberOfTags [
 	"for queries, some times we want to search all entities that do not have any tags"
 
+	<FMProperty: #numberOfTags type: #Number>
+	<derived>
+	<FMComment: 'Returns the number of tags present on the entity.'>
 	^ self tags size
 ]
 
