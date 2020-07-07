@@ -1,10 +1,43 @@
 Extension { #name : #MooseEntity }
 
 { #category : #'*Famix-Tagging' }
-MooseEntity >> entityTagAssociations [
+MooseEntity >> allEntityTagAssociations [
 	"All entity tag associations placed on this entity"
 
 	^ self tagAssociations select: #isEntityTagAssociation
+]
+
+{ #category : #'*Famix-Tagging' }
+MooseEntity >> allTagAssociations [
+	<FMProperty: #allTagAssociations type: #FamixTagAssociation opposite: #entity>
+	<multivalued>
+	<FMComment: 'All the tag associations linking this entity to a Tag'>
+	^ self propertyNamed: #allTagAssociations ifAbsentPut: [ FMMultivalueLink on: self opposite: #entity: ]
+]
+
+{ #category : #'*Famix-Tagging' }
+MooseEntity >> allTagAssociations: aCollection [
+	self allTagAssociations value: aCollection
+]
+
+{ #category : #'*Famix-Tagging' }
+MooseEntity >> allTags [
+	"all tags on me"
+
+	"
+	
+	self removeTags
+	
+	"
+
+	^ (self allTagAssociations collectAsSet: #tag) asArray
+]
+
+{ #category : #'*Famix-Tagging' }
+MooseEntity >> entityTagAssociations [
+	"All entity tag associations placed on this entity"
+
+	^ self allEntityTagAssociations reject: #isHidden
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -34,25 +67,17 @@ MooseEntity >> numberOfTags [
 MooseEntity >> removeTag: aTag [
 	"remove a tag from this moose entity"
 
-	self tagAssociations detect: [ :assoc | assoc tag = aTag ] ifFound: #remove
+	self allTagAssociations detect: [ :assoc | assoc tag = aTag ] ifFound: #remove
 ]
 
 { #category : #'*Famix-Tagging' }
 MooseEntity >> removeTags [
-	self tagAssociations asOrderedCollection do: #remove
+	self allTagAssociations asOrderedCollection do: #remove
 ]
 
 { #category : #'*Famix-Tagging' }
 MooseEntity >> tagAssociations [
-	<FMProperty: #tagAssociations type: #FamixTagAssociation opposite: #entity>
-	<multivalued>
-	<FMComment: 'All the tag associations linking this entity to a Tag'>
-	^ self propertyNamed: #tagAssociations ifAbsentPut: [ FMMultivalueLink on: self opposite: #entity: ]
-]
-
-{ #category : #'*Famix-Tagging' }
-MooseEntity >> tagAssociations: aCollection [
-	self tagAssociations value: aCollection
+	^ self allTagAssociations reject: #isHidden
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -74,13 +99,7 @@ MooseEntity >> tagWithName: aTagName tagModel: aTagModel [
 
 { #category : #'*Famix-Tagging' }
 MooseEntity >> tags [
-	"all tags on me"
-	"
-	
-	self removeTags
-	
-	"
-	^ (self tagAssociations collectAsSet: #tag) asArray
+	^ self allTags reject: #isHidden
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -92,7 +111,7 @@ MooseEntity >> tagsInModel: aTagModel [
 MooseEntity >> toggleTag: aTag [
 	"If the entity as already tagged with this tag, remove it. Else, tag the entity."
 
-	self tags
+	self allTags
 		detect: [ :tag | tag = aTag ]
 		ifFound: [ :tag | self removeTag: tag ]
 		ifNone: [ aTag tagEntity: self ]

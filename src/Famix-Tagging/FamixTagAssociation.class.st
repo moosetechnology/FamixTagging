@@ -59,7 +59,7 @@ FamixTagAssociation >> checkingDoubleTagging [
 
 { #category : #accessing }
 FamixTagAssociation >> entity [
-	<FMProperty: #entity type: #MooseEntity>
+	<FMProperty: #entity type: #MooseEntity opposite: #allTagAssociations>
 	<FMComment: 'Tagged entity'>
 	^ entity
 ]
@@ -160,7 +160,7 @@ FamixTagAssociation >> setEntityTo: anEntity [
 	anEntity ifNotNil: [ anEntity mooseModel ifNotNil: [ :model | self mooseModel: model ] ].
 	entity := FMMultivalueLink
 		on: self
-		update: #tagAssociations
+		update: #allTagAssociations
 		from: self entity
 		to: anEntity
 ]
