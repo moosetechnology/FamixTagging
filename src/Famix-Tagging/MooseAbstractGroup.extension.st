@@ -91,6 +91,11 @@ MooseAbstractGroup >> importTagsFrom: aStream tagModel: aTagModel [
 ]
 
 { #category : #'*Famix-Tagging' }
+MooseAbstractGroup >> rootTags [
+	^ self allRootTags reject: #isHidden
+]
+
+{ #category : #'*Famix-Tagging' }
 MooseAbstractGroup >> tagCategoryNamed: aCategoryMooseName [
 	^ [ self findTagCategoryNamed: aCategoryMooseName ]
 		on: NotFound

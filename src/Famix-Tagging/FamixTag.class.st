@@ -301,6 +301,11 @@ FamixTag >> hasUniqueMooseNameInModel [
 ]
 
 { #category : #accessing }
+FamixTag >> hide [
+	isHidden := true
+]
+
+{ #category : #accessing }
 FamixTag >> id [
 	<FMProperty: #id type: #Number>
 	<FMComment: 'This id is unique and all associations point it'>

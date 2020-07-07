@@ -35,6 +35,33 @@ FamixTagMooseModelTest >> testAllModelTags [
 ]
 
 { #category : #tests }
+FamixTagMooseModelTest >> testAllRootTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+
+	self assertCollection: model allRootTags hasSameElements: {tag1 . tag3}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testAllRootTagsWithHiddenTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model allRootTags hasSameElements: {tag1 . tag3}
+]
+
+{ #category : #tests }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenAddingATag [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
@@ -156,6 +183,20 @@ FamixTagMooseModelTest >> testNumberPackages [
 FamixTagMooseModelTest >> testRetrievalFromModelWithCategories [
 	self assert: (model tagCategoryNamed: 'feature') markedTags size equals: 1.
 	self assertEmpty: (model tagCategoryNamed: 'default') markedTags
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testRootTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model rootTags hasSameElements: {tag1}
 ]
 
 { #category : #tests }
