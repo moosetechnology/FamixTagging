@@ -1,8 +1,15 @@
 Extension { #name : #MooseAbstractGroup }
 
 { #category : #'*Famix-Tagging' }
+MooseAbstractGroup >> allEntityTagAssociations [
+	"All entity tags placed on this entity"
+
+	^ self allWithType: FamixTagEntityAssociation
+]
+
+{ #category : #'*Famix-Tagging' }
 MooseAbstractGroup >> allRootTags [
-	^ self tags select: #isRoot
+	^ self allTags select: #isRoot
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -15,6 +22,12 @@ MooseAbstractGroup >> allTagAssociations [
 MooseAbstractGroup >> allTagCategories [
 	<navigation: 'All tag categories stored in this model'>
 	^ self allWithSubTypesOf: FamixTagCategory
+]
+
+{ #category : #'*Famix-Tagging' }
+MooseAbstractGroup >> allTags [
+	<navigation: 'All simple or composite tags known by this model'>
+	^ self allWithType: FamixTag
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -51,7 +64,7 @@ MooseAbstractGroup >> entitiesTaggedWith: aTag [
 MooseAbstractGroup >> entityTagAssociations [
 	"All entity tags placed on this entity"
 
-	^ self allWithType: FamixTagEntityAssociation
+	^ self allEntityTagAssociations reject: #isHidden
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -61,7 +74,7 @@ MooseAbstractGroup >> exportTagsOn: aStream tagModel: aTagModel [
 
 { #category : #'*Famix-Tagging' }
 MooseAbstractGroup >> findEquivalentTagTo: aFamixTag [
-	^ self tags detect: [ :aTag | aTag equivalentTo: aFamixTag ]
+	^ self allTags detect: [ :aTag | aTag equivalentTo: aFamixTag ]
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -78,7 +91,7 @@ MooseAbstractGroup >> findTagNamed: aTagMooseName [
 
 { #category : #'*Famix-Tagging' }
 MooseAbstractGroup >> findTagWithId: aTagId [
-	^ self tags detect: [ :aTag | aTag id = aTagId ]
+	^ self allTags detect: [ :aTag | aTag id = aTagId ]
 ]
 
 { #category : #'*Famix-Tagging' }
@@ -117,8 +130,6 @@ MooseAbstractGroup >> tagNamed: aTagMooseName [
 
 { #category : #'*Famix-Tagging' }
 MooseAbstractGroup >> tags [
-	"to allow tag queries on groups of entities"
-
-	<navigation: 'All simple or composite tags known by this model'>
-	^ self allWithType: FamixTag
+	<navigation: 'All visible simple or composite tags known by this model'>
+	^ self allTags reject: #isHidden
 ]

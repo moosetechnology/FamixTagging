@@ -66,6 +66,33 @@ FamixTagMooseModelTest >> testAllTagAssociations [
 ]
 
 { #category : #tests }
+FamixTagMooseModelTest >> testAllTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+
+	self assertCollection: model allTags hasSameElements: {tag1 . tag2. tag3}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testAllTagsWithHiddenTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model allTags hasSameElements: {tag1 . tag2 . tag3}
+]
+
+{ #category : #tests }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenAddingATag [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
@@ -308,6 +335,20 @@ FamixTagMooseModelTest >> testTagsExportAndImportMSE [
 	self assert: (importedModel tagNamed: 'database') description equals: 'Implements database functionality'.
 	self assert: (importedModel entityNamed: 'Package1::Class1') codeTagAssociations size equals: 1.
 	self assert: (importedModel entityNamed: 'Package1::Class1') entityTagAssociations size equals: 1
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testTagsWithHidden [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model tags hasSameElements: {tag1 . tag2}
 ]
 
 { #category : #tests }

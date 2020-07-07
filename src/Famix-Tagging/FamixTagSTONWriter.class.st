@@ -31,7 +31,7 @@ Class {
 FamixTagSTONWriter class >> export: aMooseModel with: aTagModel on: aStream [
 	(self on: aStream)
 		tagModel: aTagModel;
-		writeObject: (FamixTagSTONExport tags: aTagModel tags categories: aTagModel allTagCategories associations: aMooseModel allTagAssociations)
+		writeObject: (FamixTagSTONExport tags: aTagModel allTags categories: aTagModel allTagCategories associations: aMooseModel allTagAssociations)
 ]
 
 { #category : #accessing }
