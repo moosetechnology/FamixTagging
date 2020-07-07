@@ -42,7 +42,8 @@ Class {
 		'serializedColor',
 		'parentTag',
 		'categories',
-		'subTags'
+		'subTags',
+		'isHidden'
 	],
 	#category : #'Famix-Tagging-Model'
 }
@@ -300,6 +301,11 @@ FamixTag >> hasUniqueMooseNameInModel [
 ]
 
 { #category : #accessing }
+FamixTag >> hide [
+	isHidden := true
+]
+
+{ #category : #accessing }
 FamixTag >> id [
 	<FMProperty: #id type: #Number>
 	<FMComment: 'This id is unique and all associations point it'>
@@ -314,11 +320,12 @@ FamixTag >> id: anObject [
 { #category : #initialization }
 FamixTag >> initialize [
 	super initialize.
-	subTags := FMNullMultivalueLink on: self opposite: #parentTag: selector: #subTags.
+	subTags := FMMultivalueLink on: self opposite: #parentTag:.
 	categories := FMMultiMultivalueLink on: self opposite: #markedTags.
 
-	self id: UUIDGenerator default nextRandom16.
-	self color: MDLColor randomColorAndTint
+	id := UUIDGenerator default nextRandom16.
+	self color: MDLColor randomColorAndTint.
+	isHidden := false
 ]
 
 { #category : #accessing }
@@ -333,6 +340,18 @@ FamixTag >> isAncestorOf: aTag [
 { #category : #testing }
 FamixTag >> isComposite [
 	^ self subTags isNotEmpty
+]
+
+{ #category : #accessing }
+FamixTag >> isHidden [
+	<FMProperty: #isHidden type: #Boolean>
+	<FMComment: 'Flag true for tags that should not appear in the tools.'>
+	^ isHidden
+]
+
+{ #category : #accessing }
+FamixTag >> isHidden: anObject [
+	isHidden := anObject
 ]
 
 { #category : #dependencies }
@@ -432,6 +451,7 @@ FamixTag >> parentSeparator [
 FamixTag >> parentTag [
 	<FMProperty: #parentTag type: #FamixTag opposite: #subTags>
 	<FMComment: 'Parent of the tag'>
+	<container>
 	^ parentTag
 ]
 
@@ -554,8 +574,10 @@ FamixTag >> subTagNamed: aString [
 
 { #category : #accessing }
 FamixTag >> subTags [
-	<FMProperty: #subTags type: #FamixTag opposite: #parentTag> <multivalued>
+	<FMProperty: #subTags type: #FamixTag opposite: #parentTag>
+	<multivalued>
 	<FMComment: 'Sub tags of this composite tag.'>
+	<derived>
 	^ subTags
 ]
 
@@ -584,4 +606,9 @@ FamixTag >> taggedEntities [
 { #category : #accessing }
 FamixTag >> taggedEntitiesInModel: aModel [
 	^ aModel entitiesTaggedWith: self
+]
+
+{ #category : #actions }
+FamixTag >> toggleVisibility [
+	isHidden := isHidden not
 ]

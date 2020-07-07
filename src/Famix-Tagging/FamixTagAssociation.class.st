@@ -59,7 +59,7 @@ FamixTagAssociation >> checkingDoubleTagging [
 
 { #category : #accessing }
 FamixTagAssociation >> entity [
-	<FMProperty: #entity type: #MooseEntity>
+	<FMProperty: #entity type: #MooseEntity opposite: #allTagAssociations>
 	<FMComment: 'Tagged entity'>
 	^ entity
 ]
@@ -121,6 +121,11 @@ FamixTagAssociation >> isEntityTagAssociation [
 	^ false
 ]
 
+{ #category : #testing }
+FamixTagAssociation >> isHidden [
+	^ self tag isHidden
+]
+
 { #category : #accessing }
 FamixTagAssociation >> mooseModel: aMooseModel [
 	"We add the association at the beginning of the model entity storage because the user can delete associations but not entities. It is much faster to delete entities at the beginning of the collection. On a big model it can take several second to delete some tags."
@@ -155,7 +160,7 @@ FamixTagAssociation >> setEntityTo: anEntity [
 	anEntity ifNotNil: [ anEntity mooseModel ifNotNil: [ :model | self mooseModel: model ] ].
 	entity := FMMultivalueLink
 		on: self
-		update: #tagAssociations
+		update: #allTagAssociations
 		from: self entity
 		to: anEntity
 ]

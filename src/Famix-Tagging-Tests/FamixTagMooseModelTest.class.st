@@ -25,13 +25,71 @@ FamixTagMooseModelTest >> testAddANewTagWithCategory [
 ]
 
 { #category : #tests }
-FamixTagMooseModelTest >> testAllModelTaggedAssociations [
+FamixTagMooseModelTest >> testAllModelTags [
+	self assert: model tags size equals: 2
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testAllRootTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+
+	self assertCollection: model allRootTags hasSameElements: {tag1 . tag3}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testAllRootTagsWithHiddenTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model allRootTags hasSameElements: {tag1 . tag3}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testAllTagAssociations [
+	self assert: model allTagAssociations size equals: 2.
+
+	model tags first hide.
+
 	self assert: model allTagAssociations size equals: 2
 ]
 
 { #category : #tests }
-FamixTagMooseModelTest >> testAllModelTags [
-	self assert: model tags size equals: 2
+FamixTagMooseModelTest >> testAllTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+
+	self assertCollection: model allTags hasSameElements: {tag1 . tag2. tag3}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testAllTagsWithHiddenTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model allTags hasSameElements: {tag1 . tag2 . tag3}
 ]
 
 { #category : #tests }
@@ -159,6 +217,29 @@ FamixTagMooseModelTest >> testRetrievalFromModelWithCategories [
 ]
 
 { #category : #tests }
+FamixTagMooseModelTest >> testRootTags [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model rootTags hasSameElements: {tag1}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testTagAssociations [
+	self assert: model tagAssociations size equals: 2.
+
+	model tags first hide.
+
+	self assert: model tagAssociations size equals: 1
+]
+
+{ #category : #tests }
 FamixTagMooseModelTest >> testTagCachesAreResetWhenAddingATag [
 	self assert: model tags size equals: 2.
 
@@ -254,6 +335,20 @@ FamixTagMooseModelTest >> testTagsExportAndImportMSE [
 	self assert: (importedModel tagNamed: 'database') description equals: 'Implements database functionality'.
 	self assert: (importedModel entityNamed: 'Package1::Class1') codeTagAssociations size equals: 1.
 	self assert: (importedModel entityNamed: 'Package1::Class1') entityTagAssociations size equals: 1
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testTagsWithHidden [
+	| tag1 tag2 tag3 |
+	model := FamixTagModel new.
+	tag1 := model createTagNamed: 'Furry'.
+	tag2 := model createTagNamed: 'Bronie'.
+	tag3 := model createTagNamed: 'Scalie'.
+
+	tag2 parentTag: tag1.
+	tag3 hide.
+
+	self assertCollection: model tags hasSameElements: {tag1 . tag2}
 ]
 
 { #category : #tests }
