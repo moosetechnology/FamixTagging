@@ -314,7 +314,7 @@ FamixTag >> id: anObject [
 { #category : #initialization }
 FamixTag >> initialize [
 	super initialize.
-	subTags := FMNullMultivalueLink on: self opposite: #parentTag: selector: #subTags.
+	subTags := FMMultivalueLink on: self opposite: #parentTag:.
 	categories := FMMultiMultivalueLink on: self opposite: #markedTags.
 
 	self id: UUIDGenerator default nextRandom16.
@@ -432,6 +432,7 @@ FamixTag >> parentSeparator [
 FamixTag >> parentTag [
 	<FMProperty: #parentTag type: #FamixTag opposite: #subTags>
 	<FMComment: 'Parent of the tag'>
+	<container>
 	^ parentTag
 ]
 
