@@ -607,3 +607,8 @@ FamixTag >> taggedEntities [
 FamixTag >> taggedEntitiesInModel: aModel [
 	^ aModel entitiesTaggedWith: self
 ]
+
+{ #category : #actions }
+FamixTag >> toggleVisibility [
+	isHidden := isHidden not
+]
