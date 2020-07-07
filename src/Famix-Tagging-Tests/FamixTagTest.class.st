@@ -125,6 +125,11 @@ FamixTagTest >> testIsRoot [
 ]
 
 { #category : #tests }
+FamixTagTest >> testIsVisibleByDefault [
+	self deny: FamixTag new isHidden
+]
+
+{ #category : #tests }
 FamixTagTest >> testMooseName [
 	self assert: compositeTag mooseName equals: #parent.
 	self assert: simpleTag mooseName equals: 'parent>leaf'

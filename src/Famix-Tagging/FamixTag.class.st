@@ -42,7 +42,8 @@ Class {
 		'serializedColor',
 		'parentTag',
 		'categories',
-		'subTags'
+		'subTags',
+		'isHidden'
 	],
 	#category : #'Famix-Tagging-Model'
 }
@@ -317,8 +318,9 @@ FamixTag >> initialize [
 	subTags := FMMultivalueLink on: self opposite: #parentTag:.
 	categories := FMMultiMultivalueLink on: self opposite: #markedTags.
 
-	self id: UUIDGenerator default nextRandom16.
-	self color: MDLColor randomColorAndTint
+	id := UUIDGenerator default nextRandom16.
+	self color: MDLColor randomColorAndTint.
+	isHidden := false
 ]
 
 { #category : #accessing }
@@ -333,6 +335,16 @@ FamixTag >> isAncestorOf: aTag [
 { #category : #testing }
 FamixTag >> isComposite [
 	^ self subTags isNotEmpty
+]
+
+{ #category : #accessing }
+FamixTag >> isHidden [
+	^ isHidden
+]
+
+{ #category : #accessing }
+FamixTag >> isHidden: anObject [
+	isHidden := anObject
 ]
 
 { #category : #dependencies }
