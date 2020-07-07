@@ -25,11 +25,6 @@ FamixTagMooseModelTest >> testAddANewTagWithCategory [
 ]
 
 { #category : #tests }
-FamixTagMooseModelTest >> testAllModelTaggedAssociations [
-	self assert: model allTagAssociations size equals: 2
-]
-
-{ #category : #tests }
 FamixTagMooseModelTest >> testAllModelTags [
 	self assert: model tags size equals: 2
 ]
@@ -59,6 +54,15 @@ FamixTagMooseModelTest >> testAllRootTagsWithHiddenTags [
 	tag3 hide.
 
 	self assertCollection: model allRootTags hasSameElements: {tag1 . tag3}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testAllTagAssociations [
+	self assert: model allTagAssociations size equals: 2.
+
+	model tags first hide.
+
+	self assert: model allTagAssociations size equals: 2
 ]
 
 { #category : #tests }
@@ -197,6 +201,15 @@ FamixTagMooseModelTest >> testRootTags [
 	tag3 hide.
 
 	self assertCollection: model rootTags hasSameElements: {tag1}
+]
+
+{ #category : #tests }
+FamixTagMooseModelTest >> testTagAssociations [
+	self assert: model tagAssociations size equals: 2.
+
+	model tags first hide.
+
+	self assert: model tagAssociations size equals: 1
 ]
 
 { #category : #tests }

@@ -344,6 +344,8 @@ FamixTag >> isComposite [
 
 { #category : #accessing }
 FamixTag >> isHidden [
+	<FMProperty: #isHidden type: #Boolean>
+	<FMComment: 'Flag true for tags that should not appear in the tools.'>
 	^ isHidden
 ]
 
@@ -572,8 +574,10 @@ FamixTag >> subTagNamed: aString [
 
 { #category : #accessing }
 FamixTag >> subTags [
-	<FMProperty: #subTags type: #FamixTag opposite: #parentTag> <multivalued>
+	<FMProperty: #subTags type: #FamixTag opposite: #parentTag>
+	<multivalued>
 	<FMComment: 'Sub tags of this composite tag.'>
+	<derived>
 	^ subTags
 ]
 

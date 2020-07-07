@@ -96,6 +96,12 @@ MooseAbstractGroup >> rootTags [
 ]
 
 { #category : #'*Famix-Tagging' }
+MooseAbstractGroup >> tagAssociations [
+	<navigation: 'Visible tag associations stored in this model'>
+	^ self allTagAssociations reject: #isHidden
+]
+
+{ #category : #'*Famix-Tagging' }
 MooseAbstractGroup >> tagCategoryNamed: aCategoryMooseName [
 	^ [ self findTagCategoryNamed: aCategoryMooseName ]
 		on: NotFound
