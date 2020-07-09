@@ -85,7 +85,7 @@ FamixTag class >> named: tagName [
 
 { #category : #ston }
 FamixTag class >> stonAllInstVarNames [
-	^ super stonAllInstVarNames reject: [ :instVar | #(#mooseID #state #mooseModel #subTags) includes: instVar ]
+	^ super stonAllInstVarNames reject: [ :instVar | #(#mooseName #mooseID #state #mooseModel #subTags) includes: instVar ]
 ]
 
 { #category : #accessing }
@@ -413,12 +413,11 @@ FamixTag >> mooseModelWithoutCheck: aMooseModel [
 FamixTag >> mooseName [
 	"A tag should always have a model. Thus we can remove the check in the overriden method for performances."
 
-	^ self privateState
-		cacheAt: #mooseName
-		ifAbsentPut: [ | stream |
+	^ mooseName
+		ifNil: [ | stream |
 			stream := (String new: 64) writeStream.
 			self mooseNameOn: stream.
-			stream contents asSymbol ]
+			mooseName := stream contents asSymbol ]
 ]
 
 { #category : #printing }
