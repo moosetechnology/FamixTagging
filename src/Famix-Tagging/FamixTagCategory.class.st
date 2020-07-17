@@ -49,7 +49,7 @@ FamixTagCategory class >> named: aString [
 
 { #category : #ston }
 FamixTagCategory class >> stonAllInstVarNames [
-	^ super stonAllInstVarNames \ #(#mooseID #state #mooseModel #markedTags)
+	^ super stonAllInstVarNames \ #(#mooseName #mooseID #cache #entityAttributes #mooseModel #markedTags)
 ]
 
 { #category : #adding }
