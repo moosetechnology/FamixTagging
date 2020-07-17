@@ -96,44 +96,44 @@ FamixTagMooseModelTest >> testAllTagsWithHiddenTags [
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenAddingATag [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
-	model privateState cacheAt: #fursona put: #jecisc.
+	model cacheAt: #fursona put: #jecisc.
 
 	model createTagNamed: 'NewTag'.
 
-	model privateState cacheAt: #fursona ifAbsent: [ self fail ]
+	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
 { #category : #tests }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenEntityWasTagged [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
-	model privateState cacheAt: #fursona put: #jecisc.
+	model cacheAt: #fursona put: #jecisc.
 
 	(model entityNamed: 'Package2') tagWithName: 'dead-code'.
 
-	model privateState cacheAt: #fursona ifAbsent: [ self fail ]
+	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
 { #category : #tests }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenEntityWasUntagged [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
-	model privateState cacheAt: #fursona put: #jecisc.
+	model cacheAt: #fursona put: #jecisc.
 
 	(model entityNamed: 'Package1::Class1') removeTags.
 
-	model privateState cacheAt: #fursona ifAbsent: [ self fail ]
+	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
 { #category : #tests }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenRemovingATag [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
-	model privateState cacheAt: #fursona put: #jecisc.
+	model cacheAt: #fursona put: #jecisc.
 
 	model tags first remove.
 
-	model privateState cacheAt: #fursona ifAbsent: [ self fail ]
+	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
 { #category : #tests }

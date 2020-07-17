@@ -85,7 +85,7 @@ FamixTag class >> named: tagName [
 
 { #category : #ston }
 FamixTag class >> stonAllInstVarNames [
-	^ super stonAllInstVarNames reject: [ :instVar | #(#mooseName #mooseID #state #mooseModel #subTags) includes: instVar ]
+	^ super stonAllInstVarNames reject: [ :instVar | #(#mooseName #mooseID #cache #entityAttributes #mooseModel #subTags) includes: instVar ]
 ]
 
 { #category : #accessing }
