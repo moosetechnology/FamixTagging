@@ -9,27 +9,51 @@ Class {
 
 { #category : #baseline }
 BaselineOfFamixTagging >> baseline: spec [
+
 	<baseline>
-	spec
-		for: #common
-		do: [ "Dependencies"
-			self
-				famix: spec;
-				materialColor: spec.
+	spec for: #common do: [ "Dependencies"
+		self materialColor: spec.
 
-			"Packages"
-			spec
-				package: 'Famix-Tagging' with: [ spec requires: #('MaterialColors' 'Famix') ];
-				package: 'Famix-Tagging-Code' with: [ spec requires: #('Famix-Tagging' 'FamixTraits') ];
-				package: 'Famix-Tagging-Tests-Generator' with: [ spec requires: #('FamixGenerator') ];
-				package: 'Famix-Tagging-Tests-Entities' with: [ spec requires: #('FamixTraits') ];
-				package: 'Famix-Tagging-Tests' with: [ spec requires: #('FamixTestModels' 'Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities') ].
+		"Packages"
+		spec
+			package: 'Famix-Tagging'
+			with: [ spec requires: #( 'MaterialColors' ) ];
+			package: 'Famix-Tagging-Code'
+			with: [ spec requires: #( 'Famix-Tagging' ) ];
+			package: 'Famix-Tagging-Tests-Generator';
+			package: 'Famix-Tagging-Tests-Entities';
+			package: 'Famix-Tagging-Tests' with: [ 
+				spec requires:
+						#( 'Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities' ) ].
 
-			"Groups"
+		"If Famix is not already present"
+		spec for: #NeedsFamix do: [ 
+			self famix: spec.
 			spec
-				group: 'TaggingMinimal' with: #('Famix-Tagging');
-				group: 'Tagging' with: #('TaggingMinimal' 'Famix-Tagging-Code');
-				group: 'TaggingTests' with: #('Famix-Tagging-Tests') ]
+				package: 'Famix-Tagging' with: [ spec requires: #( 'Famix' ) ];
+				package: 'Famix-Tagging-Code'
+				with: [ spec requires: #( 'FamixTraits' ) ];
+				package: 'Famix-Tagging-Tests-Generator'
+				with: [ spec requires: #( 'FamixGenerator' ) ];
+				package: 'Famix-Tagging-Tests-Entities'
+				with: [ spec requires: #( 'FamixTraits' ) ];
+				package: 'Famix-Tagging-Tests'
+				with: [ spec requires: #( 'FamixTestModels' ) ] ].
+
+		"Groups"
+		spec
+			group: 'TaggingMinimal' with: #( 'Famix-Tagging' );
+			group: 'Tagging' with: #( 'TaggingMinimal' 'Famix-Tagging-Code' );
+			group: 'TaggingTests' with: #( 'Famix-Tagging-Tests' ) ]
+]
+
+{ #category : #accessing }
+BaselineOfFamixTagging >> customProjectAttributes [
+
+	^ RPackageOrganizer default packages
+		  detect: [ :package | package name = 'BaselineOfFamix' ]
+		  ifFound: [ #(  ) ]
+		  ifNone: [ #( #NeedsFamix ) ]
 ]
 
 { #category : #dependencies }
