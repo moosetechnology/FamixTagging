@@ -15,7 +15,7 @@ jobs:
       PROJECT_NAME: ${{ matrix.smalltalk }}-Famix-Tagging
     strategy:
       matrix:
-        smalltalk: [ Moose64-9.0, Moose64-8.0 ]
+        smalltalk: [ Pharo64-9.0, Pharo64-8.0 ]
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2
