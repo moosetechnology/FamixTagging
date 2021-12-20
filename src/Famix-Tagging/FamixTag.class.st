@@ -124,29 +124,6 @@ FamixTag >> allClientsIn: aMooseGroup [
 	^ self shouldNotImplement
 ]
 
-{ #category : #iterating }
-FamixTag >> allEntitiesRecursivelyIn: aMooseModel [
-	"Compute _set_ of all entities in the tag and its sub-tags"
-
-	^ (self taggedEntitiesInModel: aMooseModel) asSet
-		addAll: (self subTags flatCollect: [ :each | each allEntitiesRecursivelyIn: aMooseModel ]);
-		yourself
-]
-
-{ #category : #iterating }
-FamixTag >> allEntitiesRecursivelyIn: aMooseModel collect: aBlockOrSelector [
-	"apply aSelector on all entities of the tag and recursively on all its sub-tags"
-
-	^ (self allEntitiesRecursivelyIn: aMooseModel) collect: [ :each | aBlockOrSelector value: each ]
-]
-
-{ #category : #iterating }
-FamixTag >> allEntitiesRecursivelyIn: aMooseModel flatCollect: aBlockOrSelector [
-	"apply aSelector on all entities of the tag and recursively on all its sub-tags"
-
-	^ (self allEntitiesRecursivelyIn: aMooseModel) flatCollect: [ :each | aBlockOrSelector value: each ]
-]
-
 { #category : #accessing }
 FamixTag >> allParentTags [
 	^ self parentTag
@@ -164,13 +141,6 @@ FamixTag >> allProvidersIn: aMooseGroup [
 { #category : #accessing }
 FamixTag >> allSubTags [
 	^ self addAllSubTagsIn: OrderedCollection new
-]
-
-{ #category : #accessing }
-FamixTag >> allTaggedEntitiesInModel: aModel [
-	^ (self allSubTags flatCollectAsSet: [ :tag | tag taggedEntitiesInModel: aModel ])
-		addAll: (self taggedEntitiesInModel: aModel);
-		yourself
 ]
 
 { #category : #dependencies }
@@ -242,11 +212,6 @@ FamixTag >> createSubTagNamedWithoutCheck: aString [
 		parentTag: self;
 		mooseModelWithoutCheck: self mooseModel;
 		yourself
-]
-
-{ #category : #removing }
-FamixTag >> deleteAssociationsInModel: aMooseModel [
-	(aMooseModel associationsForTag: self) do: #remove
 ]
 
 { #category : #accessing }
@@ -350,23 +315,6 @@ FamixTag >> isHidden: anObject [
 	isHidden := anObject
 ]
 
-{ #category : #dependencies }
-FamixTag >> isInListOfPossibleLinks: aCollection forModel: aMooseModel [
-	^ aCollection includesAny: (self allTaggedEntitiesInModel: aMooseModel)
-]
-
-{ #category : #dependencies }
-FamixTag >> isLinkedTo: aTagOrEntity dependancyDirection: aDirectionStrategy in: aMooseModel [
-	| dependencies |
-	dependencies := self allEntitiesRecursivelyIn: aMooseModel flatCollect: [ :entity | aDirectionStrategy dependenciesAtReceiverScopeOf: entity ].
-
-	"In the entity is a MooseEntity, with check if it is in its dependencies. 
-	If it is a tag, we look in the tags of its dependencies and the parents of those tags."
-	^ (aTagOrEntity isTag
-		ifTrue: [ dependencies flatCollectAsSet: [ :entity | entity tags , (entity tags flatCollect: #allParentTags) ] ]
-		ifFalse: [ dependencies ]) includes: aTagOrEntity
-]
-
 { #category : #testing }
 FamixTag >> isRoot [
 	"A Root tag is a tag without parent that should be displayed at the first layer of a tree representation of a tag hierarchy."
@@ -377,17 +325,6 @@ FamixTag >> isRoot [
 { #category : #testing }
 FamixTag >> isTag [
 	^ true
-]
-
-{ #category : #actions }
-FamixTag >> mergeWith: anotherTag forModel: aModel [
-	(aModel associationsForTag: anotherTag) do: [ :aTagAssociation | aTagAssociation tag: self ].
-	anotherTag allSubTags copy
-		do: [ :tag | 
-			[ tag changeParentTagTo: self ]
-				on: FamixAlreadyExistTagFailure
-				do: [ :anException | anException existingTag mergeWith: tag forModel: aModel ] ].
-	anotherTag remove
 ]
 
 { #category : #accessing }
@@ -482,13 +419,6 @@ FamixTag >> remove [
 			self removeFromModel ].
 	self setParentTagAtNil.
 	self subTags do: #remove
-]
-
-{ #category : #removing }
-FamixTag >> removeAndDeleteAssociationsInModel: aMooseModel [
-	self subTags copy do: [ :aSubTag | aSubTag removeAndDeleteAssociationsInModel: aMooseModel ].
-	self deleteAssociationsInModel: aMooseModel.
-	self remove
 ]
 
 { #category : #removing }
@@ -589,18 +519,6 @@ FamixTag >> tagEntity: anEntity [
 { #category : #actions }
 FamixTag >> tagWith: aTag [
 	FamixTagOnTagFailure signal
-]
-
-{ #category : #accessing }
-FamixTag >> taggedEntities [
-	"Should only use that if you store tag and entities in the same model"
-
-	^ self taggedEntitiesInModel: self mooseModel
-]
-
-{ #category : #accessing }
-FamixTag >> taggedEntitiesInModel: aModel [
-	^ aModel entitiesTaggedWith: self
 ]
 
 { #category : #actions }
