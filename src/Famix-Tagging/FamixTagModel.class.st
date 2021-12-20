@@ -1,10 +1,7 @@
 "
-Description
---------------------
+I am a moose model for tags. I am separated from the MooseModel with MooseEntities because my tags can be applied to different MooseModels (for project versions, mutations...).
 
-I am a model for Tags. I am separated from the classical MooseModel because I can concern many mooseModel (for project versions, mutations...).
-
-Consequently there is no strong link between the entities and the FamixTagModel because this one must remain independant and cross version.
+For this, there is no strong link between MooseEntities and the FamixTagModel
 "
 Class {
 	#name : #FamixTagModel,

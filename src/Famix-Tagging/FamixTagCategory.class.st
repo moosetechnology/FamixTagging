@@ -1,15 +1,11 @@
 "
-Description
---------------------
-
 I can be associated with a tag to add semantic to it. For example, a tag that represents system architecture.
 	
-Internal Representation and Key Implementation Points.
---------------------
+## Internal Representation and Key Implementation Points.
 
-    Instance Variables
-	markedTags:		<aCollection>		The list of tags present in the category.
-	name:				<aString>				The label of the category.
+Instance Variables
+- markedTags: <aCollection> The list of tags present in the category.
+- name: <aString> The label of the category.
 
 "
 Class {

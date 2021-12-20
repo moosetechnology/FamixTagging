@@ -1,35 +1,31 @@
 "
-Description
---------------------
-
-I represent a concept that can be attatched to a famix entity. 
+I represent a concept that can be attached to MooseEntities. 
 
 I may have multiple uses such as:
 - Injecting human knowledge
 - Bookmark entities
 - Create subconcepts 
 - Plan rearchitecture
-- …
 
-I can contain other tags, in that case I am a composite tag. 
+Tags can be organized in categories: `FamixTagCategory`. 
 
-Tags can be organized in categories that are FamixCategory. 
+Tags can be defined in _intent_ (a computable boolean function telling whether the tag applied to an entity) or in _extent_ (a list of entities to which the tag applies).
+`FamixTagAssociation` represent the link between a tag and an entity.
 
-A tag can tag entities but this link is not direct. FamixTagAssociation represent the link between a tag and an entity.
-This link is mandatory because it allows a user to tag entities in a MooseModel, create a new MooseModel for an updated version of its application, and migrate the tags to the new model.
-In that case, the associations will be able to attach themselves to new FamixTags in the new model.
- 
-Internal Representation and Key Implementation Points.
---------------------
+Tags have an optional default color. Some visualizations that don't assign themselves colors to entities will use this default color to mark entities tagged.
 
-    Instance Variables
-	categories:					<aCollection>		The list of categories a tag is included in.
-	childrenTags:				<aCollection>		A collection of subtags. If it is not empty, this mean I am recursive.
-	description:					<aString>				A string that is the description of the tag provided by the user.
-	id:								<aNumber>				An id representing the tag. The association saves this ID to make the link with the tag in necessary.
-	name:							<aString>				Name of the tag provided by the user.
-	parentTag:					<aFamixTag>			The famix tag in which I am located. If nil, this mean that I am a root tag.
-	serializedColor:			<aString>				Hex string representation of the tag's color. We save colors as string because Moose does not manage colors as part of the MM.
+Tags can contain other tags, if so, they are composite tags. 
+
+## Internal Representation and Key Implementation Points.
+
+Instance Variables
+- categories: <aCollection> The list of categories a tag is included in.
+- childrenTags: <aCollection> A collection of subtags. If it is not empty, this mean I am recursive.
+- description: <aString> A string that is the description of the tag provided by the user.
+- id: <aNumber> An id representing the tag. The association saves this ID to make the link with the tag in necessary.
+- name: <aString> Name of the tag provided by the user.
+- parentTag: <aFamixTag> The famix tag in which I am located. If nil, this mean that I am a root tag.
+- serializedColor: <aString> Hex string representation of the tag's color. We save colors as string because Moose does not manage colors as part of the MM.
 
 "
 Class {

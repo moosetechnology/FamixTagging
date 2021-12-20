@@ -1,20 +1,16 @@
 "
-Description
---------------------
-
-I represent the link between a tag and the tagged entity. 
-For more information on my usefulness, read the comment of FamixTag.	
+I represent the link between an extent tag and a tagged entity. 
 
 The tag I reference is referenced weakly. 
-This allows one to change of model and my associations will find the tags of the updated model by searching for a tag with the right id.
- 
-Internal Representation and Key Implementation Points.
---------------------
+This allows one to create a new MooseModel for an updated version of its application, and migrate the tags to the new model.
+In that case, the associations will be able to attach themselves to new FamixTags in the new model by searching for a tag with the right id.
 
-    Instance Variables
-	entity:		<aFamixEntity>		The tagged entity.
-	tag:			<aFamixTag>			A weak reference to the tag tagging the entity.
-	tagId:			<aNumber>				The id of the tag used in case we lose the reference.
+## Internal Representation and Key Implementation Points.
+
+Instance Variables
+- entity: <aFamixEntity> The tagged entity.
+- tag:	 <aFamixTag> A weak reference to the tag tagging the entity.
+- tagId: <aNumber> The id of the tag used in case we lose the reference.
 
 "
 Class {
