@@ -72,6 +72,22 @@ FamixTagModelTest >> testAddTagInModel [
 ]
 
 { #category : #tests }
+FamixTagModelTest >> testAssociationShouldBeUniqueAfterSeveralTaggings [
+	| mooseModel tag entity |
+	mooseModel := FamixTagTestModel new.
+	tag := model tagNamed: 'Example'.
+	entity := MooseEntity new
+		mooseModel: mooseModel;
+		yourself.
+	tag tagEntity: entity.
+	tag tagEntity: entity.
+
+	self assert: entity tags equals: {tag}.
+
+	self assert: mooseModel allTagAssociations size equals: 1
+]
+
+{ #category : #tests }
 FamixTagModelTest >> testCreateTag [
 	| tag |
 	tag := model createTagNamed: 'MyTag'.

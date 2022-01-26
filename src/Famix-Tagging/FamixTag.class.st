@@ -587,8 +587,11 @@ FamixTag >> subTags: aCollection [
 
 { #category : #actions }
 FamixTag >> tagEntity: anEntity [
-	
-	^ FamixTagEntityAssociation newForEntity: anEntity tag: self
+
+	(anEntity allTags anySatisfy: [ :each | each = self ]) ifTrue: [
+		"There is already an association between this tag and the entity"
+		^ self ].
+	FamixTagEntityAssociation newForEntity: anEntity tag: self
 ]
 
 { #category : #actions }
