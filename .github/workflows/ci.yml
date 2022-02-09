@@ -1,21 +1,27 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  [push, pull_request]
 
 jobs:
+  get-matrix:
+    runs-on: ubuntu-latest
+    outputs: 
+      pharo-version: ${{ steps.get-matrix-from-json.outputs.pharo-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get Matrix
+        id: get-matrix-from-json          
+        run: |
+          PHAROVERSION=$(cat $GITHUB_WORKSPACE/.github/workflows/pharo-versions.json)
+          echo "::set-output name=pharo-version::$PHAROVERSION"
   build:
     runs-on: ubuntu-latest
-    env:
-      PROJECT_NAME: ${{ matrix.smalltalk }}-Famix-Tagging
+    needs:
+      - get-matrix
     strategy:
-      matrix:
-        smalltalk: [ Pharo64-9.0, Pharo64-8.0 ]
+      matrix: 
+        smalltalk: ${{ fromJSON(needs.get-matrix.outputs.pharo-version) }}
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2
