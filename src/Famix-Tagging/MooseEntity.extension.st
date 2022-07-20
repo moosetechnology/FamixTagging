@@ -41,6 +41,16 @@ MooseEntity >> entityTagAssociations [
 ]
 
 { #category : #'*Famix-Tagging' }
+MooseEntity >> hasTag: aTag [
+	^ self tags includes: aTag
+]
+
+{ #category : #'*Famix-Tagging' }
+MooseEntity >> hasTagNamed: aTagName [
+	^ self tags anySatisfy:  [:aTag | aTag name = aTagName ].
+]
+
+{ #category : #'*Famix-Tagging' }
 MooseEntity >> isTagged [
 	<FMProperty: #isTagged type: #Boolean>
 	<derived>
@@ -50,6 +60,7 @@ MooseEntity >> isTagged [
 
 { #category : #'*Famix-Tagging' }
 MooseEntity >> isTaggedWith: aTag [
+	self deprecated: 'Use #hasTag: instead.' transformWith: '``@object isTaggedWith: ``@aTag ' -> '``@object hasTag: ``@aTag '.
 	^ self tags includes: aTag
 ]
 
