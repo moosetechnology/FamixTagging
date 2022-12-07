@@ -51,7 +51,7 @@ BaselineOfFamixTagging >> baseline: spec [
 BaselineOfFamixTagging >> customProjectAttributes [
 
 	^ RPackageOrganizer default packages
-		  detect: [ :package | package name = 'BaselineOfFamix' ]
+		  detect: [ :package | package name = 'Moose-Core' ]
 		  ifFound: [ #(  ) ]
 		  ifNone: [ #( #NeedsFamix ) ]
 ]
