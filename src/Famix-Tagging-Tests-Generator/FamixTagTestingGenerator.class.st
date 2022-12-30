@@ -77,3 +77,9 @@ FamixTagTestingGenerator >> defineHierarchy [
 
 	sourceTextAnchor --|> #THasImmediateSource
 ]
+
+{ #category : #initialization }
+FamixTagTestingGenerator >> initialize [
+	super initialize.
+	self notImportedFromFile
+]
