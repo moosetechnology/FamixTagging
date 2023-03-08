@@ -587,7 +587,9 @@ FamixTag >> subTags: aCollection [
 
 { #category : #actions }
 FamixTag >> tagEntity: anEntity [
-	FamixTagEntityAssociation newForEntity: anEntity tag: self
+
+	(anEntity hasTag: self) ifFalse: [ 
+		FamixTagEntityAssociation newForEntity: anEntity tag: self ]
 ]
 
 { #category : #actions }
