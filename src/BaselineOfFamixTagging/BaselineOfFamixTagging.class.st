@@ -7,38 +7,28 @@ Class {
 	#category : #BaselineOfFamixTagging
 }
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfFamixTagging >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [ "Dependencies"
 		self materialColor: spec.
+		self famix: spec.
 
 		"Packages"
 		spec
 			package: 'Famix-Tagging'
-			with: [ spec requires: #( 'MaterialColors' ) ];
+			with: [ spec requires: #( 'Famix' 'MaterialColors' ) ];
 			package: 'Famix-Tagging-Code'
-			with: [ spec requires: #( 'Famix-Tagging' ) ];
-			package: 'Famix-Tagging-Tests-Generator';
-			package: 'Famix-Tagging-Tests-Entities';
-			package: 'Famix-Tagging-Tests' with: [ 
+			with: [ spec requires: #( 'FamixTraits' 'Famix-Tagging' ) ];
+			package: 'Famix-Tagging-Tests-Generator'
+			with: [ spec requires: #( 'FamixGenerator' ) ];
+			package: 'Famix-Tagging-Tests-Entities'
+			with: [ spec requires: #( 'FamixTraits' ) ];
+			package: 'Famix-Tagging-Tests' with: [
 				spec requires:
-						#( 'Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities' ) ].
-
-		"If Famix is not already present"
-		spec for: #NeedsFamix do: [ 
-			self famix: spec.
-			spec
-				package: 'Famix-Tagging' with: [ spec requires: #( 'Famix' ) ];
-				package: 'Famix-Tagging-Code'
-				with: [ spec requires: #( 'FamixTraits' ) ];
-				package: 'Famix-Tagging-Tests-Generator'
-				with: [ spec requires: #( 'FamixGenerator' ) ];
-				package: 'Famix-Tagging-Tests-Entities'
-				with: [ spec requires: #( 'FamixTraits' ) ];
-				package: 'Famix-Tagging-Tests'
-				with: [ spec requires: #( 'FamixTestModels' ) ] ].
+						#( 'FamixTestModels' 'Famix-Tagging' 'Famix-Tagging-Code'
+						   'Famix-Tagging-Tests-Entities' ) ].
 
 		"Groups"
 		spec
