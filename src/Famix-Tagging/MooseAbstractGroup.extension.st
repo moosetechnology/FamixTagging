@@ -86,7 +86,7 @@ MooseAbstractGroup >> findTagCategoryNamed: aCategoryMooseName [
 MooseAbstractGroup >> findTagNamed: aTagMooseName [
 	"we dont care about tag category"
 
-	^ self detect: [ :anEntity | anEntity mooseName = aTagMooseName ]
+	^ self allTags detect: [ :anEntity | anEntity mooseName = aTagMooseName ]
 ]
 
 { #category : #'*Famix-Tagging' }
