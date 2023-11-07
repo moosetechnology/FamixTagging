@@ -45,41 +45,29 @@ FamixTagTestingGenerator >> defineClasses [
 	invocation := builder newClassNamed: #Invocation.
 	package := builder newClassNamed: #Package.
 
-	entity := builder newClassNamed: #Entity.
 	sourceTextAnchor := builder newClassNamed: #SourceTextAnchor.
 ]
 
 { #category : #definition }
 FamixTagTestingGenerator >> defineHierarchy [
+
 	super defineHierarchy.
 
-	access --|> entity.
 	access --|> #TAccess.
 
-	attribute --|> entity.
 	attribute --|> #TAttribute.
 
-	class --|> entity.
 	class --|> #TClass.
 	class --|> #TSourceEntity.
 
-	invocation --|> entity.
 	invocation --|> #TInvocation.
 
-	method --|> entity.
 	method --|> #TMethod.
 	method --|> #TSourceEntity.
 
-	package --|> entity.
 	package --|> #TPackage.
 	package --|> #TWithTypes.
 	package --|> #TNamedEntity.
 
 	sourceTextAnchor --|> #THasImmediateSource
-]
-
-{ #category : #initialization }
-FamixTagTestingGenerator >> initialize [
-	super initialize.
-	self notImportedFromFile
 ]

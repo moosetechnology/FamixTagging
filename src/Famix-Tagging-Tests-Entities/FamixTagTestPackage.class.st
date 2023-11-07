@@ -12,5 +12,5 @@ FamixTagTestPackage class >> annotation [
 	<FMClass: #Package super: #FamixTagTestEntity>
 	<package: #'Famix-Tagging-Tests-Entities'>
 	<generated>
-	^self
+	^ self
 ]

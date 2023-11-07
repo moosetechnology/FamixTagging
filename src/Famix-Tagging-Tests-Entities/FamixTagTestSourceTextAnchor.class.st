@@ -12,5 +12,5 @@ FamixTagTestSourceTextAnchor class >> annotation [
 	<FMClass: #SourceTextAnchor super: #FamixTagTestEntity>
 	<package: #'Famix-Tagging-Tests-Entities'>
 	<generated>
-	^self
+	^ self
 ]
