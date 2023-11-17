@@ -12,10 +12,5 @@ FamixTagTestClass class >> annotation [
 	<FMClass: #Class super: #FamixTagTestEntity>
 	<package: #'Famix-Tagging-Tests-Entities'>
 	<generated>
-	^self
-]
-
-{ #category : #ambiguous }
-FamixTagTestClass >> numberOfLinesOfCode: aNumber [
-	self cacheAt: #numberOfLinesOfCode put: aNumber
+	^ self
 ]
