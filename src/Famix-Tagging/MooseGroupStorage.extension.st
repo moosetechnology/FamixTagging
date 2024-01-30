@@ -1,7 +1,7 @@
-Extension { #name : #MooseGroupRuntimeStorage }
+Extension { #name : #MooseGroupStorage }
 
 { #category : #'*Famix-Tagging' }
-MooseGroupRuntimeStorage >> addTaggingEntityFirst: anElement [
+MooseGroupStorage >> addTaggingEntityFirst: anElement [
 	elements addFirst: anElement.
 	self updateCacheOnAddingOf: anElement.
 	^ anElement
