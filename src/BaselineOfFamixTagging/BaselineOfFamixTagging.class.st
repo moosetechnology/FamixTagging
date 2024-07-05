@@ -13,22 +13,13 @@ BaselineOfFamixTagging >> baseline: spec [
 	<baseline>
 	spec for: #common do: [ "Dependencies"
 		self materialColor: spec.
-		self famix: spec.
 
 		"Packages"
-		spec
-			package: 'Famix-Tagging'
-			with: [ spec requires: #( 'Famix' 'MaterialColors' ) ];
-			package: 'Famix-Tagging-Code'
-			with: [ spec requires: #( 'FamixTraits' 'Famix-Tagging' ) ];
-			package: 'Famix-Tagging-Tests-Generator'
-			with: [ spec requires: #( 'FamixGenerator' ) ];
-			package: 'Famix-Tagging-Tests-Entities'
-			with: [ spec requires: #( 'FamixTraits' ) ];
-			package: 'Famix-Tagging-Tests' with: [
-				spec requires:
-						#( 'FamixTestModels' 'Famix-Tagging' 'Famix-Tagging-Code'
-						   'Famix-Tagging-Tests-Entities' ) ].
+		self dependenciesWhenInMoose: spec.
+
+		spec for: #needsFamix do: [
+			self famix: spec.
+			self dependenciesWhenNotInMoose: spec ].
 
 		"Groups"
 		spec
@@ -44,6 +35,38 @@ BaselineOfFamixTagging >> customProjectAttributes [
 		  detect: [ :package | package name = 'BaselineOfMoose' ]
 		  ifFound: [ #(  ) ]
 		  ifNone: [ #( #NeedsFamix ) ]
+]
+
+{ #category : #baselines }
+BaselineOfFamixTagging >> dependenciesWhenInMoose: spec [
+
+	spec
+		package: 'Famix-Tagging'
+		with: [ spec requires: #( 'MaterialColors' ) ];
+		package: 'Famix-Tagging-Code';
+		package: 'Famix-Tagging-Tests-Generator';
+		package: 'Famix-Tagging-Tests-Entities';
+		package: 'Famix-Tagging-Tests' with: [
+			spec requires:
+					#( 'Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities' ) ]
+]
+
+{ #category : #baselines }
+BaselineOfFamixTagging >> dependenciesWhenNotInMoose: spec [
+
+	spec
+		package: 'Famix-Tagging'
+		with: [ spec requires: #( 'Famix' 'MaterialColors' ) ];
+		package: 'Famix-Tagging-Code'
+		with: [ spec requires: #( 'FamixTraits' 'Famix-Tagging' ) ];
+		package: 'Famix-Tagging-Tests-Generator'
+		with: [ spec requires: #( 'FamixGenerator' ) ];
+		package: 'Famix-Tagging-Tests-Entities'
+		with: [ spec requires: #( 'FamixTraits' ) ];
+		package: 'Famix-Tagging-Tests' with: [
+			spec requires:
+					#( 'FamixTestModels' 'Famix-Tagging' 'Famix-Tagging-Code'
+					   'Famix-Tagging-Tests-Entities' ) ]
 ]
 
 { #category : #'as yet unclassified' }
