@@ -31,10 +31,9 @@ BaselineOfFamixTagging >> baseline: spec [
 { #category : #accessing }
 BaselineOfFamixTagging >> customProjectAttributes [
 
-	^ RPackageOrganizer default packages
-		  detect: [ :package | package name = 'BaselineOfMoose' ]
-		  ifFound: [ #(  ) ]
-		  ifNone: [ #( #NeedsFamix ) ]
+	'BaselineOfMoose' asPackageIfAbsent: [ ^ #( #NeedsFamix ) ].
+	^ #( )
+
 ]
 
 { #category : #baselines }
