@@ -12,6 +12,13 @@ MooseModel >> addTaggingEntityFirst: anElement [
 ]
 
 { #category : #'*Famix-Tagging' }
+MooseModel >> allTaggedEntities [
+
+	^ self allTags flatCollectAsSet: [ :tag |
+		  tag taggedEntitiesInModel: self ]
+]
+
+{ #category : #'*Famix-Tagging' }
 MooseModel >> removeTagProperties [
 	"I am used when we remove tags to update the caches"
 

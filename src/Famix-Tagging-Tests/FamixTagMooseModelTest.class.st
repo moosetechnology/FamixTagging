@@ -66,6 +66,12 @@ FamixTagMooseModelTest >> testAllTagAssociations [
 ]
 
 { #category : #tests }
+FamixTagMooseModelTest >> testAllTaggedEntities [
+	self assert: (model allTaggedEntities size) equals: 1. 
+	self assertCollection: (model allTaggedEntities ) hasSameElements: {model entityNamed: 'Package1::Class1'}
+]
+
+{ #category : #tests }
 FamixTagMooseModelTest >> testAllTags [
 	| tag1 tag2 tag3 |
 	model := FamixTagModel new.

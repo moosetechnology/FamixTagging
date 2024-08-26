@@ -21,6 +21,23 @@ MooseEntity >> allTagAssociations: aCollection [
 ]
 
 { #category : #'*Famix-Tagging' }
+MooseEntity >> allTaggedEntities [
+	| taggedEntities |
+	
+	taggedEntities := OrderedCollection new.
+	self allTaggedEntitiesIn: taggedEntities .
+	^ taggedEntities .
+	
+]
+
+{ #category : #'*Famix-Tagging' }
+MooseEntity >> allTaggedEntitiesIn: anOrderedCollection [ 
+	self isTagged ifTrue: [ anOrderedCollection add: self ].
+	self children do: [ :c | c allTaggedEntitiesIn: anOrderedCollection ].
+	^anOrderedCollection 
+]
+
+{ #category : #'*Famix-Tagging' }
 MooseEntity >> allTags [
 	"all tags on me"
 
