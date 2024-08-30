@@ -14,8 +14,7 @@ MooseModel >> addTaggingEntityFirst: anElement [
 { #category : #'*Famix-Tagging' }
 MooseModel >> allTaggedEntities [
 
-	^ self allTags flatCollectAsSet: [ :tag |
-		  tag taggedEntitiesInModel: self ]
+	^ self allTagAssociations collect: [ :assoc | assoc entity ] as: Set
 ]
 
 { #category : #'*Famix-Tagging' }
