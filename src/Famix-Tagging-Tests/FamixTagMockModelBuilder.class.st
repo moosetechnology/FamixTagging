@@ -10,6 +10,12 @@ Class {
 	#category : #'Famix-Tagging-Tests'
 }
 
+{ #category : #'model-building' }
+FamixTagMockModelBuilder class >> buildComplexModel [
+
+	^ self new buildComplexModel
+]
+
 { #category : #running }
 FamixTagMockModelBuilder class >> buildModel [
 	^self new buildModel
@@ -30,6 +36,48 @@ FamixTagMockModelBuilder >> buildCodeTag [
 		addCategory: ((FamixTagCategory named: 'bookmark') mooseModel: self model);
 		mooseModel: self model;
 		tagInterval: (10 to: 300) forEntity: entity sourceAnchor: entity sourceAnchor
+]
+
+{ #category : #'model-building' }
+FamixTagMockModelBuilder >> buildComplexModel [
+
+	| package fooClass factoryClass dataAttribute dataSetter makeFooMethod tag1 tag2 |
+	model := FamixTagTestModel new.
+
+	package := model newPackageNamed: 'Foo-Core'.
+	package types: {
+			(fooClass := model newClassNamed: 'Foo').
+			(factoryClass := model newClassNamed: 'FooFactory') }.
+
+	"Foo.data"
+	dataAttribute := model newAttributeNamed: 'data'.
+	dataAttribute parentType: fooClass.
+
+	"Foo >> #data:"
+	dataSetter := model newMethodNamed: 'data:'.
+	dataSetter parentType: fooClass.
+	dataSetter accesses: { (model newAccess variable: dataAttribute) }.
+
+	"FooFactory >> #makeFooWith:"
+	makeFooMethod := model newMethodNamed: 'makeFooWith:'.
+	makeFooMethod parentType: factoryClass.
+	makeFooMethod outgoingInvocations: {
+			(model newInvocation receiver: fooClass).
+			(model newInvocation candidates: { dataSetter }) }.
+
+	"create and set tags"
+	tag1 := model addTaggingEntityFirst: (FamixTag named: 'tag1').
+	tag1 tagEntity: package.
+	tag1 tagEntity: fooClass.
+	tag1 tagEntity: dataSetter incomingInvocations first.
+	tag1 tagEntity: dataAttribute.
+
+	tag2 := model addTaggingEntityFirst: (FamixTag named: 'tag2').
+	tag2 tagEntity: fooClass.
+	tag2 tagEntity: dataSetter accesses first.
+	tag2 tagEntity: makeFooMethod.
+
+	^ model
 ]
 
 { #category : #'model-building' }

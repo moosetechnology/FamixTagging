@@ -67,8 +67,25 @@ FamixTagMooseModelTest >> testAllTagAssociations [
 
 { #category : #tests }
 FamixTagMooseModelTest >> testAllTaggedEntities [
-	self assert: (model allTaggedEntities size) equals: 1. 
-	self assertCollection: (model allTaggedEntities ) hasSameElements: {model entityNamed: 'Package1::Class1'}
+
+	self
+		assertCollection: model allTaggedEntities
+		hasSameElements: { (model entityNamed: 'Package1::Class1') }.
+
+	"more complex model with multiple tags at different levels"
+	model := FamixTagMockModelBuilder buildComplexModel.
+
+	"on a model"
+	self
+		assertCollection: model allTaggedEntities
+		hasSameElements: (model select: [ :entity | entity isTagged ]).
+
+	"on an entity"
+	self
+		assertCollection: (model entityNamed: 'Foo') allTaggedEntities
+		hasSameElements: {
+				(model entityNamed: 'Foo').
+				(model entityNamed: 'data') }
 ]
 
 { #category : #tests }

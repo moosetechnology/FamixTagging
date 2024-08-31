@@ -21,6 +21,6 @@ FamixTagImportAndExportManyObjectsTest >> testNumberOfClasses [
 ]
 
 { #category : #tests }
-FamixTagImportAndExportManyObjectsTest >> testNumberOftags [
+FamixTagImportAndExportManyObjectsTest >> testNumberOfTags [
 	self assert: model tags size equals: 1000
 ]
