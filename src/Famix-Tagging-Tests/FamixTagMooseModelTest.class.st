@@ -7,6 +7,12 @@ Class {
 	#category : #'Famix-Tagging-Tests'
 }
 
+{ #category : #accessing }
+FamixTagMooseModelTest >> getClass1InModel: aModel [
+
+	^ aModel entityNamed: 'Package1.Class1'
+]
+
 { #category : #running }
 FamixTagMooseModelTest >> setUp [
 	super setUp.
@@ -70,7 +76,7 @@ FamixTagMooseModelTest >> testAllTaggedEntities [
 
 	self
 		assertCollection: model allTaggedEntities
-		hasSameElements: { (model entityNamed: 'Package1::Class1') }.
+		hasSameElements: { (self getClass1InModel: model) }.
 
 	"more complex model with multiple tags at different levels"
 	model := FamixTagMockModelBuilder buildComplexModel.
@@ -143,7 +149,7 @@ FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenEntityWasUntagged [
 
 	model cacheAt: #fursona put: #jecisc.
 
-	(model entityNamed: 'Package1::Class1') removeTags.
+	(self getClass1InModel: model) removeTags.
 
 	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
@@ -161,11 +167,15 @@ FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenRemovingATag [
 
 { #category : #tests }
 FamixTagMooseModelTest >> testCodeTagAssociation [
+
 	| interval |
 	interval := model codeTagAssociations first.
 	self assert: model codeTagAssociations size equals: 1.
-	self assert: interval entity equals: (model entityNamed: 'Package1::Class1').
-	self assert: interval tag equals: (model entityNamed: 'Package1::Class1') codeTagAssociations anyOne tag
+	self assert: interval entity equals: (self getClass1InModel: model).
+	self
+		assert: interval tag
+		equals:
+		(self getClass1InModel: model) codeTagAssociations anyOne tag
 ]
 
 { #category : #tests }
@@ -176,29 +186,39 @@ FamixTagMooseModelTest >> testCodeTags [
 
 { #category : #tests }
 FamixTagMooseModelTest >> testDetagEntityAssociation [
+
 	| modelSize |
 	modelSize := model size.
 	model entityTagAssociations first remove.
 	self assertEmpty: model entityTagAssociations.
 	self assert: model size equals: modelSize - 1.
-	self assertEmpty: (model entityNamed: 'Package1::Class1') entityTagAssociations.
-	self assert: (model entityNamed: 'Package1::Class1') codeTagAssociations size equals: 1
+	self assertEmpty:
+		(self getClass1InModel: model) entityTagAssociations.
+	self
+		assert: (self getClass1InModel: model) codeTagAssociations size
+		equals: 1
 ]
 
 { #category : #tests }
 FamixTagMooseModelTest >> testDetagIntervalAssociation [
+
 	| modelSize |
 	modelSize := model size.
 	model codeTagAssociations anyOne remove.
 	self assertEmpty: model codeTagAssociations.
 	self assert: model size equals: modelSize - 1.
-	self assertEmpty: (model entityNamed: 'Package1::Class1') codeTagAssociations.
-	self assert: (model entityNamed: 'Package1::Class1') entityTagAssociations size equals: 1
+	self assertEmpty: (self getClass1InModel: model) codeTagAssociations.
+	self
+		assert: (self getClass1InModel: model) entityTagAssociations size
+		equals: 1
 ]
 
 { #category : #tests }
 FamixTagMooseModelTest >> testEntityTagAssociation [
-	self assert: (model entityNamed: 'Package1::Class1') entityTagAssociations size equals: 1.
+
+	self
+		assert: (self getClass1InModel: model) entityTagAssociations size
+		equals: 1
 ]
 
 { #category : #tests }
@@ -282,9 +302,10 @@ FamixTagMooseModelTest >> testTagCachesAreResetWhenEntityWasTagged [
 
 { #category : #tests }
 FamixTagMooseModelTest >> testTagCachesAreResetWhenEntityWasUntagged [
+
 	self assert: model entityTagAssociations size equals: 1.
 
-	(model entityNamed: 'Package1::Class1') removeTags.
+	(self getClass1InModel: model) removeTags.
 
 	self assertEmpty: model entityTagAssociations
 ]
@@ -332,20 +353,24 @@ FamixTagMooseModelTest >> testTags [
 
 { #category : #tests }
 FamixTagMooseModelTest >> testTagsExportAndImportMSE [
+
 	| importedModel interval importedTag tempFile |
 	tempFile := (FileSystem memory / 'export-test.mse') ensureCreateFile.
 	tempFile writeStreamDo: [ :stream | model exportToMSEStream: stream ].
 
 	self assert: (model tagNamed: 'dead-code') color equals: Color red.
 
-	importedModel := tempFile readStreamDo: [ :stream | FamixTagTestModel new importFromMSEStream: stream ].
+	importedModel := tempFile readStreamDo: [ :stream |
+		                 FamixTagTestModel new importFromMSEStream: stream ].
 
 	self assert: importedModel size equals: model size.
 	self assert: importedModel codeTagAssociations size equals: 1.
 
 	interval := importedModel codeTagAssociations first.
 
-	self assert: interval entity equals: (importedModel entityNamed: 'Package1::Class1').
+	self
+		assert: interval entity
+		equals: (self getClass1InModel: importedModel).
 	self assert: interval tag serializedColor equals: 'FF0000'.
 	self assert: interval tag description equals: 'Not used code'.
 
@@ -355,9 +380,17 @@ FamixTagMooseModelTest >> testTagsExportAndImportMSE [
 	self assert: interval tag categories first name equals: 'bookmark'.
 	self assert: importedTag name equals: 'dead-code'.
 	self assert: importedTag description equals: 'Not used code'.
-	self assert: (importedModel tagNamed: 'database') description equals: 'Implements database functionality'.
-	self assert: (importedModel entityNamed: 'Package1::Class1') codeTagAssociations size equals: 1.
-	self assert: (importedModel entityNamed: 'Package1::Class1') entityTagAssociations size equals: 1
+	self
+		assert: (importedModel tagNamed: 'database') description
+		equals: 'Implements database functionality'.
+	self
+		assert:
+		(self getClass1InModel: importedModel) codeTagAssociations size
+		equals: 1.
+	self
+		assert:
+		(self getClass1InModel: importedModel) entityTagAssociations size
+		equals: 1
 ]
 
 { #category : #tests }

@@ -116,7 +116,7 @@ FamixTagMockModelBuilder >> createEntitiesFor: counter [
 
 { #category : #helpers }
 FamixTagMockModelBuilder >> entityToTag [
-	^ model entityNamed: 'Package1::Class1'
+	^ model entityNamed: 'Package1.Class1'
 ]
 
 { #category : #helpers }

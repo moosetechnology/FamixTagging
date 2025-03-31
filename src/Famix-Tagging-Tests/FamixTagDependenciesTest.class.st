@@ -31,12 +31,14 @@ FamixTagDependenciesTest >> createTestEntities: i [
 
 { #category : #accessing }
 FamixTagDependenciesTest >> method1 [
-	^ model entityNamed: 'Package1::Class1.Method1'
+
+	^ model entityNamed: 'Package1.Class1.Method1'
 ]
 
 { #category : #accessing }
 FamixTagDependenciesTest >> method2 [
-	^ model entityNamed: 'Package2::Class2.Method2'
+
+	^ model entityNamed: 'Package2.Class2.Method2'
 ]
 
 { #category : #running }
@@ -54,15 +56,15 @@ FamixTagDependenciesTest >> tagEntities [
 	parentTag := model createTagNamed: 'compositeTag1'.
 	classTag := model createTagNamed: 'classTag1'.
 	classTag parentTag: parentTag.
-	(model entityNamed: 'Package1::Class1') tagWith: classTag.
+	(model entityNamed: 'Package1.Class1') tagWith: classTag.
 
 	parentTag := model createTagNamed: 'compositeTag2'.
 	classTag := model createTagNamed: 'classTag2'.
 	classTag parentTag: parentTag.
-	(model entityNamed: 'Package2::Class2') tagWith: classTag.
+	(model entityNamed: 'Package2.Class2') tagWith: classTag.
 
 	classTag := model createTagNamed: 'classTag3'.
-	(model entityNamed: 'Package3::Class3.Attribute3') tagWith: classTag
+	(model entityNamed: 'Package3.Class3.Attribute3') tagWith: classTag
 ]
 
 { #category : #accessing }
