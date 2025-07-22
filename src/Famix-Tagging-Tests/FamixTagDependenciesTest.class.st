@@ -1,13 +1,14 @@
 Class {
-	#name : #FamixTagDependenciesTest,
-	#superclass : #TestCase,
+	#name : 'FamixTagDependenciesTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Tagging-Tests'
+	#category : 'Famix-Tagging-Tests',
+	#package : 'Famix-Tagging-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagDependenciesTest >> addDependencies [
 	FamixTagTestInvocation source: self method1 target: {self method2}.
 
@@ -16,7 +17,7 @@ FamixTagDependenciesTest >> addDependencies [
 	FamixTagTestInvocation source: self method2 target: {self method1}
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagDependenciesTest >> createTestEntities: i [
 	| class |
 	class := (FamixTagTestClass named: 'Class' , i asString model: model)
@@ -29,19 +30,19 @@ FamixTagDependenciesTest >> createTestEntities: i [
 	(FamixTagTestAttribute named: 'Attribute' , i asString model: model) parentType: class
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagDependenciesTest >> method1 [
 
 	^ model entityNamed: 'Package1.Class1.Method1'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagDependenciesTest >> method2 [
 
 	^ model entityNamed: 'Package2.Class2.Method2'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagDependenciesTest >> setUp [
 	super setUp.
 	model := FamixTagTestModel new.
@@ -50,7 +51,7 @@ FamixTagDependenciesTest >> setUp [
 	self tagEntities
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagDependenciesTest >> tagEntities [
 	| parentTag classTag |
 	parentTag := model createTagNamed: 'compositeTag1'.
@@ -67,17 +68,17 @@ FamixTagDependenciesTest >> tagEntities [
 	(model entityNamed: 'Package3.Class3.Attribute3') tagWith: classTag
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagDependenciesTest >> tagNamed: aString [
 	^ model tags detect: [ :tag | tag name = aString ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagDependenciesTest >> testClientsTagFromCompositeTag [
 	self assert: ((self tagNamed: 'classTag2') allClientsIn: {(self tagNamed: 'compositeTag1')} forModel: model) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagDependenciesTest >> testNumberOfLinesOfCode [
 	| compositeTag |
 	compositeTag := model tagNamed: 'compositeTag1'.
@@ -90,7 +91,7 @@ FamixTagDependenciesTest >> testNumberOfLinesOfCode [
 	self assert: ((model tagNamed: 'compositeTag1>classTag1') allEntitiesRecursivelyIn: model collect: #numberOfLinesOfCode) sumNumbers equals: 10
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagDependenciesTest >> testProviderTagToCompositeTag [
 	self assert: ((self tagNamed: 'classTag1') allProvidersIn: {(self tagNamed: 'compositeTag2')} forModel: model) size equals: 1
 ]

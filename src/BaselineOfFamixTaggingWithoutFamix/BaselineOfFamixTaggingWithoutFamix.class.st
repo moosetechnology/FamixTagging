@@ -11,12 +11,13 @@ Moose -> Tagging -> Famix
 Metacello will detect both famix as different and will fail. To avoid that we create a baseline without famix and one with famix.
 "
 Class {
-	#name : #BaselineOfFamixTaggingWithoutFamix,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfFamixTaggingWithoutFamix
+	#name : 'BaselineOfFamixTaggingWithoutFamix',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfFamixTaggingWithoutFamix',
+	#package : 'BaselineOfFamixTaggingWithoutFamix'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BaselineOfFamixTaggingWithoutFamix >> baseline: spec [
 	<baseline>
 	spec
@@ -39,7 +40,7 @@ BaselineOfFamixTaggingWithoutFamix >> baseline: spec [
 				group: 'TaggingTests' with: #('Famix-Tagging-Tests') ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamixTaggingWithoutFamix >> materialColor: spec [
 	spec
 		baseline: 'MaterialColors'
@@ -48,7 +49,7 @@ BaselineOfFamixTaggingWithoutFamix >> materialColor: spec [
 				repository: 'github://DuneSt/MaterialColors:v2.x.x/src' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfFamixTaggingWithoutFamix >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]

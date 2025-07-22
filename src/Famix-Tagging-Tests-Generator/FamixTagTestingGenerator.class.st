@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTagTestingGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixTagTestingGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'method',
 		'attribute',
@@ -11,30 +11,31 @@ Class {
 		'entity',
 		'sourceTextAnchor'
 	],
-	#category : #'Famix-Tagging-Tests-Generator'
+	#category : 'Famix-Tagging-Tests-Generator',
+	#package : 'Famix-Tagging-Tests-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagTestingGenerator class >> packageName [
 	^ #'Famix-Tagging-Tests-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagTestingGenerator class >> prefix [
 	^ #FamixTagTest
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTagTestingGenerator class >> shouldBeUpToDateInLatestMoose [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagTestingGenerator class >> submetamodels [
 	^ {FamixGenerator}
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTagTestingGenerator >> defineClasses [
 	super defineClasses.
 
@@ -48,7 +49,7 @@ FamixTagTestingGenerator >> defineClasses [
 	sourceTextAnchor := builder newClassNamed: #SourceTextAnchor.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTagTestingGenerator >> defineHierarchy [
 
 	super defineHierarchy.

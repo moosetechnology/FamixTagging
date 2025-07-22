@@ -1,25 +1,26 @@
 Class {
-	#name : #FamixTagMooseModelTest,
-	#superclass : #TestCase,
+	#name : 'FamixTagMooseModelTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Tagging-Tests'
+	#category : 'Famix-Tagging-Tests',
+	#package : 'Famix-Tagging-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagMooseModelTest >> getClass1InModel: aModel [
 
 	^ aModel entityNamed: 'Package1.Class1'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagMooseModelTest >> setUp [
 	super setUp.
 	model := FamixTagMockModelBuilder buildModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAddANewTagWithCategory [
 	| oldSize |
 	oldSize := model tags size.
@@ -30,12 +31,12 @@ FamixTagMooseModelTest >> testAddANewTagWithCategory [
 	self deny: model tags size equals: oldSize + 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAllModelTags [
 	self assert: model tags size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAllRootTags [
 	| tag1 tag2 tag3 |
 	model := FamixTagModel new.
@@ -48,7 +49,7 @@ FamixTagMooseModelTest >> testAllRootTags [
 	self assertCollection: model allRootTags hasSameElements: {tag1 . tag3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAllRootTagsWithHiddenTags [
 	| tag1 tag2 tag3 |
 	model := FamixTagModel new.
@@ -62,7 +63,7 @@ FamixTagMooseModelTest >> testAllRootTagsWithHiddenTags [
 	self assertCollection: model allRootTags hasSameElements: {tag1 . tag3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAllTagAssociations [
 	self assert: model allTagAssociations size equals: 2.
 
@@ -71,7 +72,7 @@ FamixTagMooseModelTest >> testAllTagAssociations [
 	self assert: model allTagAssociations size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAllTaggedEntities [
 
 	self
@@ -94,7 +95,7 @@ FamixTagMooseModelTest >> testAllTaggedEntities [
 				(model entityNamed: 'data') }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAllTags [
 	| tag1 tag2 tag3 |
 	model := FamixTagModel new.
@@ -107,7 +108,7 @@ FamixTagMooseModelTest >> testAllTags [
 	self assertCollection: model allTags hasSameElements: {tag1 . tag2. tag3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testAllTagsWithHiddenTags [
 	| tag1 tag2 tag3 |
 	model := FamixTagModel new.
@@ -121,7 +122,7 @@ FamixTagMooseModelTest >> testAllTagsWithHiddenTags [
 	self assertCollection: model allTags hasSameElements: {tag1 . tag2 . tag3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenAddingATag [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
@@ -132,7 +133,7 @@ FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenAddingATag [
 	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenEntityWasTagged [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
@@ -143,7 +144,7 @@ FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenEntityWasTagged [
 	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenEntityWasUntagged [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
@@ -154,7 +155,7 @@ FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenEntityWasUntagged [
 	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenRemovingATag [
 	"When using tags we do not want to invalidate model caches all the time. Only the ones relative to tags."
 
@@ -165,7 +166,7 @@ FamixTagMooseModelTest >> testClassicCachesAreNotResetWhenRemovingATag [
 	model cacheAt: #fursona ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testCodeTagAssociation [
 
 	| interval |
@@ -178,13 +179,13 @@ FamixTagMooseModelTest >> testCodeTagAssociation [
 		(self getClass1InModel: model) codeTagAssociations anyOne tag
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testCodeTags [
 	self assert: model tags size equals: 2.
 	self assert: model tags anyOne serializedColor equals: 'FF0000'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testDetagEntityAssociation [
 
 	| modelSize |
@@ -199,7 +200,7 @@ FamixTagMooseModelTest >> testDetagEntityAssociation [
 		equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testDetagIntervalAssociation [
 
 	| modelSize |
@@ -213,7 +214,7 @@ FamixTagMooseModelTest >> testDetagIntervalAssociation [
 		equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testEntityTagAssociation [
 
 	self
@@ -221,7 +222,7 @@ FamixTagMooseModelTest >> testEntityTagAssociation [
 		equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testExportImportChildren [
 	| importedModel file |
 	model := FamixTagTestModel new.
@@ -240,7 +241,7 @@ FamixTagMooseModelTest >> testExportImportChildren [
 	self assert: (importedModel tags detect: #isComposite) subTags size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testNoCategoryAddTag [
 	| myModel |
 	myModel := FamixTagTestModel new.
@@ -248,18 +249,18 @@ FamixTagMooseModelTest >> testNoCategoryAddTag [
 	self assert: myModel tags size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testNumberPackages [
 	self assert: model allModelPackages size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testRetrievalFromModelWithCategories [
 	self assert: (model tagCategoryNamed: 'feature') markedTags size equals: 1.
 	self assertEmpty: (model tagCategoryNamed: 'default') markedTags
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testRootTags [
 	| tag1 tag2 tag3 |
 	model := FamixTagModel new.
@@ -273,7 +274,7 @@ FamixTagMooseModelTest >> testRootTags [
 	self assertCollection: model rootTags hasSameElements: {tag1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagAssociations [
 	self assert: model tagAssociations size equals: 2.
 
@@ -282,7 +283,7 @@ FamixTagMooseModelTest >> testTagAssociations [
 	self assert: model tagAssociations size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagCachesAreResetWhenAddingATag [
 	self assert: model tags size equals: 2.
 
@@ -291,7 +292,7 @@ FamixTagMooseModelTest >> testTagCachesAreResetWhenAddingATag [
 	self assert: model tags size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagCachesAreResetWhenEntityWasTagged [
 	self assert: model entityTagAssociations size equals: 1.
 
@@ -300,7 +301,7 @@ FamixTagMooseModelTest >> testTagCachesAreResetWhenEntityWasTagged [
 	self assert: model entityTagAssociations size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagCachesAreResetWhenEntityWasUntagged [
 
 	self assert: model entityTagAssociations size equals: 1.
@@ -310,7 +311,7 @@ FamixTagMooseModelTest >> testTagCachesAreResetWhenEntityWasUntagged [
 	self assertEmpty: model entityTagAssociations
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagCachesAreResetWhenRemovingATag [
 	self assert: model tags size equals: 2.
 
@@ -319,13 +320,13 @@ FamixTagMooseModelTest >> testTagCachesAreResetWhenRemovingATag [
 	self assert: model tags size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagDescription [
 	self assert: model tags first description equals: 'Not used code'.
 	self assert: model tags second description equals: 'Implements database functionality'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagRemoval [
 	| tag entity |
 	tag := model tags first.
@@ -338,12 +339,12 @@ FamixTagMooseModelTest >> testTagRemoval [
 	self assert: model tags size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTaggedEntities [
 	self assert: model tags first taggedEntities size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTags [
 	| entityTags |
 	entityTags := model tags second.
@@ -351,7 +352,7 @@ FamixTagMooseModelTest >> testTags [
 	self assert: entityTags serializedColor equals: '00FF00'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagsExportAndImportMSE [
 
 	| importedModel interval importedTag tempFile |
@@ -393,7 +394,7 @@ FamixTagMooseModelTest >> testTagsExportAndImportMSE [
 		equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testTagsWithHidden [
 	| tag1 tag2 tag3 |
 	model := FamixTagModel new.
@@ -407,7 +408,7 @@ FamixTagMooseModelTest >> testTagsWithHidden [
 	self assertCollection: model tags hasSameElements: {tag1 . tag2}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseModelTest >> testToggleTag [
 	| entity tag numberOfTag |
 	entity := model allPackages anyOne.

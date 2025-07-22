@@ -18,53 +18,55 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FamixTagAssociation,
-	#superclass : #MooseEntity,
+	#name : 'FamixTagAssociation',
+	#superclass : 'MooseEntity',
 	#instVars : [
 		'#tagId',
 		'#entity',
 		'#tag => WeakSlot'
 	],
-	#category : #'Famix-Tagging-Model'
+	#category : 'Famix-Tagging-Model',
+	#package : 'Famix-Tagging',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTagAssociation class >> annotation [
 	<FMClass: #Association super: #MooseEntity>
 	<package: #Tagging>
 	<abstract>
 ]
 
-{ #category : #'import-export' }
+{ #category : 'import-export' }
 FamixTagAssociation class >> fuelIgnoredInstanceVariableNames [
     ^#('mooseID')
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTagAssociation class >> newForEntity: entity tag: aTag [
 	^ self new
 		entity: entity tag: aTag;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> announceUpdate [
 	self mooseModel ifNotNil: [ :model | model announcer announce: FamixTagModifiedAnnouncement ]
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagAssociation >> checkingDoubleTagging [
 	^ (self entity tagAssociations \ { self }) anySatisfy: [ :anAssociation | anAssociation tag = self tag ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> entity [
 	<FMProperty: #entity type: #MooseEntity opposite: #allTagAssociations>
 	<FMComment: 'Tagged entity'>
 	^ entity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> entity: anEntity [
 	"The tag association must be stored in the same model as the entity"
 
@@ -72,7 +74,7 @@ FamixTagAssociation >> entity: anEntity [
 	self announceUpdate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> entity: anEntity tag: aTag [
 	self
 		setEntityTo: anEntity;
@@ -80,7 +82,7 @@ FamixTagAssociation >> entity: anEntity tag: aTag [
 		announceUpdate
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagAssociation >> fromSton: aTagStonReader [
 	| actions failed |
 	failed := false.
@@ -104,29 +106,29 @@ FamixTagAssociation >> fromSton: aTagStonReader [
 	(failed not and: [ self checkingDoubleTagging ]) ifTrue: [ self remove ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixTagAssociation >> initialize [
 	
 	self class initializeSlots: self.
 	super initialize.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTagAssociation >> isCodeTagAssociation [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTagAssociation >> isEntityTagAssociation [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTagAssociation >> isHidden [
 	^ self tag isHidden
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> mooseModel: aMooseModel [
 	"We add the association at the beginning of the model entity storage because the user can delete associations but not entities. It is much faster to delete entities at the beginning of the collection. On a big model it can take several second to delete some tags."
 
@@ -134,13 +136,13 @@ FamixTagAssociation >> mooseModel: aMooseModel [
 	self privateSetMooseModel: aMooseModel
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTagAssociation >> mooseNameOn: aStream [
 
 	aStream nextPutAll: self name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTagAssociation >> printOn: aStream [
 	aStream
 		nextPutAll: 'TagAssociation(';
@@ -148,14 +150,14 @@ FamixTagAssociation >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #tagging }
+{ #category : 'tagging' }
 FamixTagAssociation >> remove [
 	self entity: nil.
 	tag := nil.
 	self mooseModel removeTaggingEntity: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> setEntityTo: anEntity [
 	anEntity ifNotNil: [ anEntity mooseModel ifNotNil: [ :model | self mooseModel: model ] ].
 	entity := FMMultivalueLink
@@ -165,19 +167,19 @@ FamixTagAssociation >> setEntityTo: anEntity [
 		to: anEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> setTagTo: aTag [
 	self tagId: aTag id.
 	self mooseModel ifNil: [ self mooseModel: aTag mooseModel ].
 	tag := aTag
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagAssociation >> stonContainSubObjects [
 	^ false
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagAssociation >> stonMapForTagModel: aTagModel [
 	^ OrderedDictionary new
 		at: #entityMooseName put: self entity mooseName;
@@ -185,12 +187,12 @@ FamixTagAssociation >> stonMapForTagModel: aTagModel [
 		yourself
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagAssociation >> stonOn: stonWriter [
 	stonWriter writeObject: self do: [ stonWriter encodeMap: (self stonMapForTagModel: stonWriter tagModel) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> tag [
 	<FMProperty: #tag type: #FamixTag>
 	<derived>
@@ -202,25 +204,25 @@ FamixTagAssociation >> tag [
 	^ tag ifNil: [ FamixTagWeakReferenceLostFailure signal: 'Weak reference to tag has been lost' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> tag: aTag [
 	self setTagTo: aTag.
 	self announceUpdate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> tagId [
 	<FMProperty: #tagId type: #Number>
 	<FMComment: 'The moose id of a tag placed on an entity (not directly the tag because it have to work on multi version'>
 	^ tagId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> tagId: aTagId [
 	tagId := aTagId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagAssociation >> tagInTagModel: aTagModel [
 	aTagModel ifNil: [ NotFound signalFor: self in: aTagModel ].
 

@@ -7,18 +7,20 @@ I am a model for Tags. I am separated from the classical MooseModel because I ca
 Consequently there is no strong link between the entities and the FamixTagModel because this one must remain independant and cross version.
 "
 Class {
-	#name : #FamixTagModel,
-	#superclass : #MooseAbstractGroup,
-	#category : #'Famix-Tagging-Model'
+	#name : 'FamixTagModel',
+	#superclass : 'MooseAbstractGroup',
+	#category : 'Famix-Tagging-Model',
+	#package : 'Famix-Tagging',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTagModel class >> annotation [
 	<FMClass: #TagModel super: #MooseAbstractGroup>
 	<package: #Tagging>
 ]
 
-{ #category : #'adding/removing' }
+{ #category : 'adding/removing' }
 FamixTagModel >> add: anEntity [
 	self
 		assert: (anEntity class = FamixTag or: anEntity class = FamixTagCategory)
@@ -26,12 +28,12 @@ FamixTagModel >> add: anEntity [
 	super add: anEntity
 ]
 
-{ #category : #'adding/removing' }
+{ #category : 'adding/removing' }
 FamixTagModel >> addTaggingEntityFirst: anEntity [
 	self add: anEntity
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 FamixTagModel >> removeTaggingEntity: aFamixTag [
 	self removeEntity: aFamixTag
 ]

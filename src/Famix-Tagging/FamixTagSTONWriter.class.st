@@ -19,27 +19,29 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FamixTagSTONWriter,
-	#superclass : #STONWriter,
+	#name : 'FamixTagSTONWriter',
+	#superclass : 'STONWriter',
 	#instVars : [
 		'tagModel'
 	],
-	#category : #'Famix-Tagging-ImportExport'
+	#category : 'Famix-Tagging-ImportExport',
+	#package : 'Famix-Tagging',
+	#tag : 'ImportExport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTagSTONWriter class >> export: aMooseModel with: aTagModel on: aStream [
 	(self on: aStream)
 		tagModel: aTagModel;
 		writeObject: (FamixTagSTONExport tags: aTagModel allTags categories: aTagModel allTagCategories associations: aMooseModel allTagAssociations)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagSTONWriter >> tagModel [
 	^ tagModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagSTONWriter >> tagModel: anObject [
 	tagModel := anObject
 ]

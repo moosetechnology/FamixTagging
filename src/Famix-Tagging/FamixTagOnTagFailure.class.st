@@ -5,7 +5,9 @@ Description
 I am an exception sent if you try to tag a tag.
 "
 Class {
-	#name : #FamixTagOnTagFailure,
-	#superclass : #FamixTagFailure,
-	#category : #'Famix-Tagging-Exceptions'
+	#name : 'FamixTagOnTagFailure',
+	#superclass : 'FamixTagFailure',
+	#category : 'Famix-Tagging-Exceptions',
+	#package : 'Famix-Tagging',
+	#tag : 'Exceptions'
 }

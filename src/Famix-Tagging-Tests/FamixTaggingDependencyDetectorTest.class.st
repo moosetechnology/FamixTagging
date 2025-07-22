@@ -2,45 +2,46 @@
 test that when entities passed a scope, they reply their outgoing or incoming according to that scope.
 "
 Class {
-	#name : #FamixTaggingDependencyDetectorTest,
-	#superclass : #TestCase,
+	#name : 'FamixTaggingDependencyDetectorTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Tagging-Tests'
+	#category : 'Famix-Tagging-Tests',
+	#package : 'Famix-Tagging-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTaggingDependencyDetectorTest >> a3 [
 	^ model entityNamed: 'Class3.attribute3'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> c1 [
 	^ model entityNamed: 'Class1'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> c2 [
 	^ model entityNamed: 'Class2'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> c3 [
 	^ model entityNamed: 'Class3'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> compositeTag1 [
 	^ self tagNamed: 'compositeTag1'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> compositeTag2 [
 	^ self tagNamed: 'compositeTag2'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> createTags [
 	| parentTag classTag |
 	parentTag := model createTagNamed: 'compositeTag1'.
@@ -53,7 +54,7 @@ FamixTaggingDependencyDetectorTest >> createTags [
 	(model entityNamed: 'Class2') tagWith: classTag
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTaggingDependencyDetectorTest >> createTestEntities: counter [
 	| package class method attribute |
 	package := FamixTest3Package named: 'package' , counter asString model: model.
@@ -66,32 +67,32 @@ FamixTaggingDependencyDetectorTest >> createTestEntities: counter [
 	attribute parentType: class
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> m1 [
 	^ model entityNamed: 'Class1.method1'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> m2 [
 	^ model entityNamed: 'Class2.method2'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> p1 [
 	^ model entityNamed: 'package1'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> p2 [
 	^ model entityNamed: 'package2'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> p3 [
 	^ model entityNamed: 'package3'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTaggingDependencyDetectorTest >> setUp [
 	super setUp.
 	model := FamixTest3Model new.
@@ -101,22 +102,22 @@ FamixTaggingDependencyDetectorTest >> setUp [
 	FamixTest3Access source: self m1 target: self a3
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> tag1 [
 	^ self tagNamed: #classTag1
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> tag2 [
 	^ self tagNamed: #classTag2
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTaggingDependencyDetectorTest >> tagNamed: aString [
 	^ model tags detect: [ :tag | tag name = aString ] ifNone: [ nil ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTaggingDependencyDetectorTest >> testClientClassFromTags [
 	self createTags.
 	"not connected to its own tag"
@@ -124,7 +125,7 @@ FamixTaggingDependencyDetectorTest >> testClientClassFromTags [
 	self assertCollection: (self c2 allClientsIn: {self compositeTag1}) hasSameElements: {self compositeTag1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTaggingDependencyDetectorTest >> testClientClassOwnTags [
 	self createTags.
 	"not connected to its own tag"
@@ -132,7 +133,7 @@ FamixTaggingDependencyDetectorTest >> testClientClassOwnTags [
 	self assertEmpty: (self c2 allClientsIn: {self compositeTag2})
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTaggingDependencyDetectorTest >> testClientTagFromClasses [
 	self createTags.
 	"not connected to its own tag"
@@ -140,7 +141,7 @@ FamixTaggingDependencyDetectorTest >> testClientTagFromClasses [
 	self assertCollection: (self compositeTag1 allClientsIn: {self m1 . self m2} forModel: model) hasSameElements: {self m2}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTaggingDependencyDetectorTest >> testProviderClassOwnTags [
 	self createTags.
 	"not connected to its own tag"
@@ -148,7 +149,7 @@ FamixTaggingDependencyDetectorTest >> testProviderClassOwnTags [
 	self assertEmpty: (self c1 allProvidersIn: {self compositeTag1})
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTaggingDependencyDetectorTest >> testProviderClassToTags [
 	self createTags.
 	"not connected to its own tag"
@@ -156,7 +157,7 @@ FamixTaggingDependencyDetectorTest >> testProviderClassToTags [
 	self assertCollection: (self c1 allProvidersIn: {self compositeTag2}) hasSameElements: {self compositeTag2}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTaggingDependencyDetectorTest >> testProviderMethodToTags [
 	<expectedFailure>
 	self createTags.
@@ -165,7 +166,7 @@ FamixTaggingDependencyDetectorTest >> testProviderMethodToTags [
 	self assert: (self m1 allProvidersIn: {self compositeTag2}) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTaggingDependencyDetectorTest >> testProviderTagToClasses [
 	"When asking all providers of a tag we should have the result of all providers for all tagged entities."
 

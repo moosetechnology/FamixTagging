@@ -1,20 +1,21 @@
 Class {
-	#name : #FamixTagMooseGroupTest,
-	#superclass : #TestCase,
+	#name : 'FamixTagMooseGroupTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Tagging-Tests'
+	#category : 'Famix-Tagging-Tests',
+	#package : 'Famix-Tagging-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagMooseGroupTest >> setUp [
 
 	super setUp.
 	model := FamixTagMockModelBuilder buildModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseGroupTest >> testTagMooseGroup [
 
 	| mooseGroup tag |
@@ -27,7 +28,7 @@ FamixTagMooseGroupTest >> testTagMooseGroup [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseGroupTest >> testTagMooseGroupWithName [
 
 	| mooseGroup |
