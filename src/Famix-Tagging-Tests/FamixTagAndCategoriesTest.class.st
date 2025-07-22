@@ -1,11 +1,10 @@
 Class {
-	#name : 'FamixTagAndCategoriesTest',
-	#superclass : 'TestCase',
-	#category : 'Famix-Tagging-Tests',
-	#package : 'Famix-Tagging-Tests'
+	#name : #FamixTagAndCategoriesTest,
+	#superclass : #TestCase,
+	#category : #'Famix-Tagging-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagAndCategoriesTest >> testAddingCategoryToATag [
 	| category tag |
 	category := FamixTagCategory new.
@@ -15,7 +14,7 @@ FamixTagAndCategoriesTest >> testAddingCategoryToATag [
 	self assert: category markedTags anyOne equals: tag
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagAndCategoriesTest >> testAddingTagToCategory [
 	| category tag |
 	category := FamixTagCategory new.

@@ -1,11 +1,10 @@
 Class {
-	#name : 'FamixTagImportAndExportManyObjectsTest',
-	#superclass : 'FamixTagMooseModelTest',
-	#category : 'Famix-Tagging-Tests',
-	#package : 'Famix-Tagging-Tests'
+	#name : #FamixTagImportAndExportManyObjectsTest,
+	#superclass : #FamixTagMooseModelTest,
+	#category : #'Famix-Tagging-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 FamixTagImportAndExportManyObjectsTest >> setUp [
 	super setUp.
 	model := FamixTagTestModel new.
@@ -15,13 +14,13 @@ FamixTagImportAndExportManyObjectsTest >> setUp [
 	model allClasses withIndexDo: [ :each :idx | each tagWithName: 'tag' , idx asString ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagImportAndExportManyObjectsTest >> testNumberOfClasses [
 	self assert: model allClasses size equals: 1000.
 	model allClasses do: [ :aClass | self denyEmpty: aClass tags ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagImportAndExportManyObjectsTest >> testNumberOfTags [
 	self assert: model tags size equals: 1000
 ]

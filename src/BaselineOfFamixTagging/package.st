@@ -1,1 +1,1 @@
-Package { #name : 'BaselineOfFamixTagging' }
+Package { #name : #BaselineOfFamixTagging }

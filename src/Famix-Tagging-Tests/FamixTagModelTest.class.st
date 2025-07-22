@@ -1,20 +1,19 @@
 Class {
-	#name : 'FamixTagModelTest',
-	#superclass : 'TestCase',
+	#name : #FamixTagModelTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'model'
 	],
-	#category : 'Famix-Tagging-Tests',
-	#package : 'Famix-Tagging-Tests'
+	#category : #'Famix-Tagging-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 FamixTagModelTest >> setUp [
 	super setUp.
 	model := FamixTagModel new
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddACategory [
 	| tag |
 	tag := model createTagNamed: 'MyTag'.
@@ -24,12 +23,12 @@ FamixTagModelTest >> testAddACategory [
 	self assert: model allTagCategories size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddACategoryToATagWithoutModel [
 	self should: [ FamixTag new addCategoryNamed: 'A' ] raise: FamixTagRequireModelFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddATagWithNoNameToParent [
 	| tag |
 	tag := FamixTag new
@@ -39,13 +38,13 @@ FamixTagModelTest >> testAddATagWithNoNameToParent [
 	self should: [ tag addSubTag: FamixTag new ] raise: FamixTagUnamedFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddATagWithSameNameInModel [
 	(FamixTag named: 'Existing') mooseModel: model.
 	self should: [ (FamixTag named: 'Existing') mooseModel: model ] raise: FamixAlreadyExistTagFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddATagWithSameNamedBrotherInModel [
 	| tag |
 	tag := (FamixTag named: 'Parent')
@@ -56,23 +55,23 @@ FamixTagModelTest >> testAddATagWithSameNamedBrotherInModel [
 	self assert: tag children size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddNonTagInModel [
 	self should: [ MooseEntity new mooseModel: model ] raise: AssertionFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddNotNamedTagInModel [
 	self should: [ FamixTag new mooseModel: model ] raise: FamixTagUnamedFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testAddTagInModel [
 	(FamixTag named: 'Foo') mooseModel: model.
 	self assert: model size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testCreateTag [
 	| tag |
 	tag := model createTagNamed: 'MyTag'.
@@ -80,7 +79,7 @@ FamixTagModelTest >> testCreateTag [
 	self assert: (model includes: tag)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testDeleteTagAndRemoveAssociationsInAnotherModel [
 	| mooseModel tag entity |
 	mooseModel := FamixTagTestModel new.
@@ -98,7 +97,7 @@ FamixTagModelTest >> testDeleteTagAndRemoveAssociationsInAnotherModel [
 	self assertEmpty: mooseModel allTagAssociations
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testRemoveACategory [
 	| tag |
 	tag := model createTagNamed: 'MyTag'.
@@ -112,7 +111,7 @@ FamixTagModelTest >> testRemoveACategory [
 	self assertEmpty: tag categories
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testRemoveTagThenRecreateIt [
 	| tag |
 	tag := model tagNamed: 'Toto'.
@@ -123,7 +122,7 @@ FamixTagModelTest >> testRemoveTagThenRecreateIt [
 	self denyEmpty: model tags
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testTagEntityFromAnotherModel [
 	| mooseModel entity tag |
 	mooseModel := FamixTagTestModel new.
@@ -137,7 +136,7 @@ FamixTagModelTest >> testTagEntityFromAnotherModel [
 	self assert: entity tagAssociations anyOne tag equals: tag
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagModelTest >> testTagNamed [
 	| tag |
 	tag := (FamixTag named: 'TestTag')

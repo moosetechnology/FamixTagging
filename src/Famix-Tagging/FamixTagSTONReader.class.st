@@ -24,35 +24,33 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'FamixTagSTONReader',
-	#superclass : 'STONReader',
+	#name : #FamixTagSTONReader,
+	#superclass : #STONReader,
 	#instVars : [
 		'tagModel',
 		'report',
 		'model'
 	],
-	#category : 'Famix-Tagging-ImportExport',
-	#package : 'Famix-Tagging',
-	#tag : 'ImportExport'
+	#category : #'Famix-Tagging-ImportExport'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 FamixTagSTONReader >> initialize [
 	super initialize.
 	self report: FamixTagImportReport new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONReader >> model [
 	^ model
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONReader >> model: anObject [
 	model := anObject
 ]
 
-{ #category : 'public' }
+{ #category : #public }
 FamixTagSTONReader >> next [
 	| object |
 	"Some reference could be ignored when the target entity of a tag does not exist"
@@ -63,17 +61,17 @@ FamixTagSTONReader >> next [
 	^ object
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONReader >> report [
 	^ report
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONReader >> report: anObject [
 	report := anObject
 ]
 
-{ #category : 'parsing' }
+{ #category : #parsing }
 FamixTagSTONReader >> skipCurrentTag [
 	self expectChar: $,.
 	[ readStream atEnd ]
@@ -84,12 +82,12 @@ FamixTagSTONReader >> skipCurrentTag [
 			self expectChar: $, ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONReader >> tagModel [
 	^ tagModel
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONReader >> tagModel: anObject [
 	tagModel := anObject
 ]

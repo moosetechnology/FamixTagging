@@ -14,19 +14,17 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'FamixTagSTONExport',
-	#superclass : 'Object',
+	#name : #FamixTagSTONExport,
+	#superclass : #Object,
 	#instVars : [
 		'tags',
 		'tagsCategories',
 		'tagsAssociations'
 	],
-	#category : 'Famix-Tagging-ImportExport',
-	#package : 'Famix-Tagging',
-	#tag : 'ImportExport'
+	#category : #'Famix-Tagging-ImportExport'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 FamixTagSTONExport class >> tags: aCollection categories: anotherCollection associations: yetAnotherCollection [
 	^ self new
 		tags: aCollection;
@@ -35,22 +33,22 @@ FamixTagSTONExport class >> tags: aCollection categories: anotherCollection asso
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONExport >> tags [
 	^ tags
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONExport >> tags: anObject [
 	tags := anObject asOrderedCollection 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONExport >> tagsAssociations: anObject [
 	tagsAssociations := anObject asOrderedCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagSTONExport >> tagsCategories: anObject [
 	tagsCategories := anObject asOrderedCollection
 ]

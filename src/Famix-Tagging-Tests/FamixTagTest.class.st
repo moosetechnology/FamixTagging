@@ -2,19 +2,18 @@
 A FamixTagTest is a test class for testing the behavior of FamixTag
 "
 Class {
-	#name : 'FamixTagTest',
-	#superclass : 'TestCase',
+	#name : #FamixTagTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'model',
 		'simpleTag',
 		'compositeTag',
 		'newTag'
 	],
-	#category : 'Famix-Tagging-Tests',
-	#package : 'Famix-Tagging-Tests'
+	#category : #'Famix-Tagging-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 FamixTagTest >> setUp [
 	super setUp.
 	model := FamixTagTestModel new.
@@ -27,21 +26,21 @@ FamixTagTest >> setUp [
 	newTag := model createTagNamed: 'newTag'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testATagCannotBeItsOwnAncestor [
 	| tag |
 	tag := model tagNamed: 'Tag'.
 	self should: [ tag parentTag: (tag createSubTagNamed: 'Son') ] raise: FamixTagRecursiveFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testATagCannotBeItsOwnParent [
 	| tag |
 	tag := model tagNamed: 'Tag'.
 	self should: [ tag parentTag: tag ] raise: FamixTagRecursiveFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testAddParentTagWhenThereIsAlreadyAParentTag [
 	self assert: compositeTag isRoot description: 'At the beginning of the test the composite tag should not have any parent.'.
 	newTag addSubTag: simpleTag.
@@ -49,45 +48,45 @@ FamixTagTest >> testAddParentTagWhenThereIsAlreadyAParentTag [
 	self deny: (compositeTag subTags includes: simpleTag) description: 'Theold parent should not have the tag anymore.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testAddSubTag [
 	self assert: compositeTag isRoot description: 'At the beginning of the test the composite tag should not have any parent.'.
 	newTag addSubTag: compositeTag.
 	self assert: compositeTag parentTag = newTag description: 'The parent should have been added.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testAllParentTags [
 	newTag addSubTag: compositeTag.
 	self assert: simpleTag allParentTags size = 2 description: 'The simple tag should have two parents: composite and newParent.'.
 	self assert: compositeTag allParentTags size = 1 description: 'The composite tag should have one parent: newParent.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testAllSubTags [
 	newTag addSubTag: compositeTag.
 	self assert: newTag allSubTags size = 2 description: 'The newParent tag should have two children: composite and simple.'.
 	self assert: compositeTag allSubTags size = 1 description: 'The composite tag should have one child: simple.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testChangeParentTagTo [
 	self assert: simpleTag parentTag = compositeTag description: 'At the beginning of the test the parent of the simple tag should be the composite tag.'.
 	simpleTag changeParentTagTo: newTag.
 	self assert: simpleTag parentTag = newTag description: 'The parent should have change and be the new parent.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testFindSubTagNamed [
 	self assert: (compositeTag findSubTagNamed: 'leaf') equals: simpleTag
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testFindSubTagNamedNonExisting [
 	self should: [ compositeTag findSubTagNamed: 'absent' ] raise: NotFound
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testIsAncestorGrandParent [
 	| parent subTag grandChild |
 	parent := model tagNamed: 'Parent'.
@@ -96,7 +95,7 @@ FamixTagTest >> testIsAncestorGrandParent [
 	self assert: (parent isAncestorOf: grandChild)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testIsAncestorParent [
 	| parent subTag |
 	parent := model tagNamed: 'Parent'.
@@ -104,7 +103,7 @@ FamixTagTest >> testIsAncestorParent [
 	self assert: (parent isAncestorOf: subTag)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testIsComposite [
 	self assert: compositeTag isComposite description: 'The composite tag have a simple tag inside him so it should be a composite'.
 	self deny: simpleTag isComposite description: 'The simple tag have no tag inside him so it should not be a composite.'.
@@ -112,7 +111,7 @@ FamixTagTest >> testIsComposite [
 	self assert: simpleTag isComposite description: 'We added a tag inside the simple tag, so it should now be a composite.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testIsRoot [
 	simpleTag promoteAsRoot.
 	self assert: simpleTag isRoot.
@@ -125,25 +124,25 @@ FamixTagTest >> testIsRoot [
 	self deny: compositeTag isRoot
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testIsVisibleByDefault [
 	self deny: FamixTag new isHidden
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testMooseName [
 	self assert: compositeTag mooseName equals: #parent.
 	self assert: simpleTag mooseName equals: 'parent>leaf'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testParentTag [
 	self assert: simpleTag parentTag = compositeTag description: 'At the beginning of the test the parent tag should be composite tag.'.
 	newTag addSubTag: simpleTag.
 	self assert: simpleTag parentTag = newTag description: 'The parent should now be newParent.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testRemoveAndPromoteSubTags [
 	newTag addSubTag: compositeTag.
 	self assert: newTag allSubTags size = 2 description: 'At the beginning the newParent tag have two children: simple and composite.'.
@@ -153,7 +152,7 @@ FamixTagTest >> testRemoveAndPromoteSubTags [
 	self assert: newTag allSubTags anyOne = simpleTag description: 'The child of my old child should now be my child'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testRemoveFromParent [
 	compositeTag addSubTag: newTag.
 	self assert: compositeTag allSubTags size = 2 description: 'At the beginning the composite tag have two children.'.
@@ -161,7 +160,7 @@ FamixTagTest >> testRemoveFromParent [
 	self assert: compositeTag allSubTags size = 1 description: 'With the simple tag removed the composite tag should have one child.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testRemoveSelfAndSubTags [
 	newTag addSubTag: compositeTag.
 	self assert: newTag allSubTags size = 2 description: 'At the beginning the newParent tag have two children: simple and composite.'.
@@ -169,7 +168,7 @@ FamixTagTest >> testRemoveSelfAndSubTags [
 	self assert: newTag allSubTags isEmpty description: 'All the tags were removed so I should not have any child.'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testRemoveSubTagThenRecreateIt [
 	| parent son |
 	parent := model createTagNamed: 'Parent'.
@@ -178,12 +177,12 @@ FamixTagTest >> testRemoveSubTagThenRecreateIt [
 	self deny: (parent createSubTagNamed: 'Son') identicalTo: son
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testSubTagNamedExisting [
 	self assert: (compositeTag subTagNamed: 'leaf') equals: simpleTag
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagTest >> testSubTagNamedNonExisting [
 	| subTag |
 	self assert: model tags size equals: 3.

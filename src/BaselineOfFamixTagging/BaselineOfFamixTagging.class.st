@@ -2,13 +2,12 @@
 I am a baseline to define the structure and dependencies of the FamixTagging project.
 "
 Class {
-	#name : 'BaselineOfFamixTagging',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfFamixTagging',
-	#package : 'BaselineOfFamixTagging'
+	#name : #BaselineOfFamixTagging,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfFamixTagging
 }
 
-{ #category : 'baselines' }
+{ #category : #baselines }
 BaselineOfFamixTagging >> baseline: spec [
 
 	<baseline>
@@ -29,7 +28,7 @@ BaselineOfFamixTagging >> baseline: spec [
 			group: 'TaggingTests' with: #( 'Famix-Tagging-Tests' ) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BaselineOfFamixTagging >> customProjectAttributes [
 
 	'BaselineOfMoose' asPackageIfAbsent: [ ^ #( #NeedsFamix ) ].
@@ -37,7 +36,7 @@ BaselineOfFamixTagging >> customProjectAttributes [
 
 ]
 
-{ #category : 'baselines' }
+{ #category : #baselines }
 BaselineOfFamixTagging >> dependenciesWhenInMoose: spec [
 
 	spec
@@ -51,7 +50,7 @@ BaselineOfFamixTagging >> dependenciesWhenInMoose: spec [
 					#( 'Famix-Tagging' 'Famix-Tagging-Code' 'Famix-Tagging-Tests-Entities' ) ]
 ]
 
-{ #category : 'baselines' }
+{ #category : #baselines }
 BaselineOfFamixTagging >> dependenciesWhenNotInMoose: spec [
 
 	spec
@@ -69,7 +68,7 @@ BaselineOfFamixTagging >> dependenciesWhenNotInMoose: spec [
 					   'Famix-Tagging-Tests-Entities' ) ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BaselineOfFamixTagging >> famix: spec [
 
 	spec
@@ -88,7 +87,7 @@ BaselineOfFamixTagging >> famix: spec [
 		with: [ spec loads: 'TestModels' ]
 ]
 
-{ #category : 'dependencies' }
+{ #category : #dependencies }
 BaselineOfFamixTagging >> materialColor: spec [
 	spec
 		baseline: 'MaterialColors'
@@ -97,7 +96,7 @@ BaselineOfFamixTagging >> materialColor: spec [
 				repository: 'github://DuneSt/MaterialColors:v2.x.x/src' ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BaselineOfFamixTagging >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]

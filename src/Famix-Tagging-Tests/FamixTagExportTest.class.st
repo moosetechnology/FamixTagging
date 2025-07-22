@@ -1,17 +1,16 @@
 Class {
-	#name : 'FamixTagExportTest',
-	#superclass : 'TestCase',
+	#name : #FamixTagExportTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'model',
 		'tag',
 		'tagModel',
 		'export'
 	],
-	#category : 'Famix-Tagging-Tests',
-	#package : 'Famix-Tagging-Tests'
+	#category : #'Famix-Tagging-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 FamixTagExportTest >> setUp [
 	super setUp.
 	model := FamixTagTestModel new.
@@ -21,7 +20,7 @@ FamixTagExportTest >> setUp [
 		yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagExportTest >> testExportThenImportInAnotherModel [
 	| newModel class newClass |
 	newModel := FamixTagTestModel new.
@@ -39,7 +38,7 @@ FamixTagExportTest >> testExportThenImportInAnotherModel [
 	self assert: newModel size equals: 2	"Class + tagAssociation"
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagExportTest >> testExportThenImportInAnotherModelAndInNewTagModel [
 	| newModel class newClass newTagModel report |
 	newModel := FamixTagTestModel new.
@@ -61,7 +60,7 @@ FamixTagExportTest >> testExportThenImportInAnotherModelAndInNewTagModel [
 	self assert: report createdTags size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagExportTest >> testExportThenImportInAnotherModelAndInNewTagModelWithCategory [
 	| newModel newTagModel category |
 	newModel := FamixTagTestModel new.
@@ -82,7 +81,7 @@ FamixTagExportTest >> testExportThenImportInAnotherModelAndInNewTagModelWithCate
 	self assertCollection: newTagModel allTagCategories first markedTags hasSameElements: newTagModel tags
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagExportTest >> testExportThenImportInAnotherModelCompositeTag [
 	| newModel childTag newTagModel newTag newChildTag |
 	newModel := FamixTagTestModel new.
@@ -108,7 +107,7 @@ FamixTagExportTest >> testExportThenImportInAnotherModelCompositeTag [
 	self assert: newChildTag parentTag equals: newTag
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagExportTest >> testExportThenImportInAnotherModelWithoutEntity [
 	| newModel class report |
 	newModel := FamixTagTestModel new.
@@ -122,7 +121,7 @@ FamixTagExportTest >> testExportThenImportInAnotherModelWithoutEntity [
 	self assertCollection: report missingEntities hasSameElements: {class mooseName}
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagExportTest >> testExportThenImportInTheSameModelDoesNotCreateDuplication [
 	| class |
 	class := FamixTagTestClass named: 'Class1' model: model.

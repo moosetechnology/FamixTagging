@@ -1,6 +1,6 @@
-Extension { #name : 'Object' }
+Extension { #name : #Object }
 
-{ #category : '*Famix-Tagging' }
+{ #category : #'*Famix-Tagging' }
 Object >> isTag [
 	^ false
 ]

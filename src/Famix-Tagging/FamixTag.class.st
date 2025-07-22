@@ -33,8 +33,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'FamixTag',
-	#superclass : 'MooseEntity',
+	#name : #FamixTag,
+	#superclass : #MooseEntity,
 	#instVars : [
 		'name',
 		'id',
@@ -45,18 +45,16 @@ Class {
 		'subTags',
 		'isHidden'
 	],
-	#category : 'Famix-Tagging-Model',
-	#package : 'Famix-Tagging',
-	#tag : 'Model'
+	#category : #'Famix-Tagging-Model'
 }
 
-{ #category : 'meta' }
+{ #category : #meta }
 FamixTag class >> annotation [
 	<FMClass: #Tag super: #MooseEntity>
 	<package: #Tagging>
 ]
 
-{ #category : 'ston' }
+{ #category : #ston }
 FamixTag class >> fromSton: aTagStonReader [
 	| aTag |
 	[ 
@@ -73,41 +71,41 @@ FamixTag class >> fromSton: aTagStonReader [
 			^ err existingTag ]
 ]
 
-{ #category : 'display' }
+{ #category : #display }
 FamixTag class >> fuelIgnoredInstanceVariableNames [
     ^#('mooseID')
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 FamixTag class >> named: tagName [
 	^ self new
 		name: tagName;
 		yourself
 ]
 
-{ #category : 'ston' }
+{ #category : #ston }
 FamixTag class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames reject: [ :instVar | #(#mooseName #mooseID #cache #entityAttributes #mooseModel #subTags) includes: instVar ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> / aChildName [
 	^ self subTagNamed: aChildName
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> addAllSubTagsIn: aCollection [
 	aCollection addAll: self subTags.
 	self subTags do: [ :each | each addAllSubTagsIn: aCollection ].
 	^ aCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> addCategory: aTagCategory [
 	self categories add: aTagCategory
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> addCategoryNamed: aString [
 	self categories
 		add:
@@ -116,21 +114,21 @@ FamixTag >> addCategoryNamed: aString [
 				ifNotNil: [ self mooseModel tagCategoryNamed: aString ])
 ]
 
-{ #category : 'children' }
+{ #category : #children }
 FamixTag >> addSubTag: aTag [
 	self checkChildValidity: aTag.
 	self subTags add: aTag.
 	aTag resetMooseName
 ]
 
-{ #category : 'dependencies' }
+{ #category : #dependencies }
 FamixTag >> allClientsIn: aMooseGroup [
 	"The tags should know in which model look for the tagged entities. Thus, #allClientsIn:forModel: should be used."
 
 	^ self shouldNotImplement
 ]
 
-{ #category : 'iterating' }
+{ #category : #iterating }
 FamixTag >> allEntitiesRecursivelyIn: aMooseModel [
 	"Compute _set_ of all entities in the tag and its sub-tags"
 
@@ -139,69 +137,69 @@ FamixTag >> allEntitiesRecursivelyIn: aMooseModel [
 		yourself
 ]
 
-{ #category : 'iterating' }
+{ #category : #iterating }
 FamixTag >> allEntitiesRecursivelyIn: aMooseModel collect: aBlockOrSelector [
 	"apply aSelector on all entities of the tag and recursively on all its sub-tags"
 
 	^ (self allEntitiesRecursivelyIn: aMooseModel) collect: [ :each | aBlockOrSelector value: each ]
 ]
 
-{ #category : 'iterating' }
+{ #category : #iterating }
 FamixTag >> allEntitiesRecursivelyIn: aMooseModel flatCollect: aBlockOrSelector [
 	"apply aSelector on all entities of the tag and recursively on all its sub-tags"
 
 	^ (self allEntitiesRecursivelyIn: aMooseModel) flatCollect: [ :each | aBlockOrSelector value: each ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> allParentTags [
 	^ self parentTag
 		ifNil: [ #() ]
 		ifNotNil: [ :tag | {tag} , tag allParentTags ]
 ]
 
-{ #category : 'dependencies' }
+{ #category : #dependencies }
 FamixTag >> allProvidersIn: aMooseGroup [
 	"The tags should know in which model look for the tagged entities. Thus, #allProvidersIn:forModel: should be used."
 
 	^ self shouldNotImplement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> allSubTags [
 	^ self addAllSubTagsIn: OrderedCollection new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> allTaggedEntitiesInModel: aModel [
 	^ (self allSubTags flatCollectAsSet: [ :tag | tag taggedEntitiesInModel: aModel ])
 		addAll: (self taggedEntitiesInModel: aModel);
 		yourself
 ]
 
-{ #category : 'dependencies' }
+{ #category : #dependencies }
 FamixTag >> canRecursivelyBeItsParent [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> categories [
 	<FMProperty: #categories type: #FamixTagCategory opposite: #markedTags> <multivalued> 
 	<FMComment: 'categories this tag is marked in'>
 	^ categories
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> categories: anObject [
 	categories value: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> changeParentTagTo: aTag [
 	self parentTag: aTag
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTag >> checkChildValidity: aTag [
 	aTag checkValidity.
 	self subTags
@@ -210,12 +208,12 @@ FamixTag >> checkChildValidity: aTag [
 				ifTrue: [ FamixAlreadyExistTagFailure signalWithTag: aSubTag ] ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTag >> checkValidity [
 	self name ifNil: [ FamixTagUnamedFailure signal ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> children [
 	<FMProperty: #children type: #FamixTag >
 	<multivalued>
@@ -224,17 +222,17 @@ FamixTag >> children [
 	^ self subTags 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> color [
 	^ Color fromHexString: self serializedColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> color: aColor [
 	self serializedColor: aColor asHexString
 ]
 
-{ #category : 'children' }
+{ #category : #children }
 FamixTag >> createSubTagNamed: aString [
 	^ (self class named: aString)
 		parentTag: self;
@@ -242,7 +240,7 @@ FamixTag >> createSubTagNamed: aString [
 		yourself
 ]
 
-{ #category : 'children' }
+{ #category : #children }
 FamixTag >> createSubTagNamedWithoutCheck: aString [
 	^ (self class named: aString)
 		parentTag: self;
@@ -250,39 +248,39 @@ FamixTag >> createSubTagNamedWithoutCheck: aString [
 		yourself
 ]
 
-{ #category : 'removing' }
+{ #category : #removing }
 FamixTag >> deleteAssociationsInModel: aMooseModel [
 	(aMooseModel associationsForTag: self) do: #remove
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> description [
 	<FMProperty: #description type: #String>
 	<FMComment: 'Description for the tag'>
 	^ description
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> description: aDescription [
 	description := aDescription
 ]
 
-{ #category : 'dependencies' }
+{ #category : #dependencies }
 FamixTag >> detectDependenciesUsing: aDetector [
 	aDetector detectDependenciesFrom: aDetector potentialDependencies
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 FamixTag >> equivalentTo: anotherEntity [
 	^ self name = anotherEntity name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> findSubTagNamed: aString [
 	^ self children detect: [ :aChild | aChild name = aString ]
 ]
 
-{ #category : 'ston' }
+{ #category : #ston }
 FamixTag >> fromSton: stonReader [
 	stonReader parseMapDo: [ :instVarName :value | 
 			| resolved |
@@ -292,34 +290,34 @@ FamixTag >> fromSton: stonReader [
 			self perform: (instVarName , ':') asSymbol with: resolved ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTag >> hasCategory: aTagCategory [
 	^ self categories includes: aTagCategory
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTag >> hasUniqueMooseNameInModel [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> hide [
 	isHidden := true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> id [
 	<FMProperty: #id type: #Number>
 	<FMComment: 'This id is unique and all associations point it'>
 	^ id
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> id: anObject [
 	id := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 FamixTag >> initialize [
 	super initialize.
 	subTags := FMMultivalueLink on: self opposite: #parentTag:.
@@ -330,7 +328,7 @@ FamixTag >> initialize [
 	isHidden := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> isAncestorOf: aTag [
 	aTag ifNil: [ ^ false ].
 
@@ -339,29 +337,29 @@ FamixTag >> isAncestorOf: aTag [
 	^ self isAncestorOf: aTag parentTag
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTag >> isComposite [
 	^ self subTags isNotEmpty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> isHidden [
 	<FMProperty: #isHidden type: #Boolean>
 	<FMComment: 'Flag true for tags that should not appear in the tools.'>
 	^ isHidden
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> isHidden: anObject [
 	isHidden := anObject
 ]
 
-{ #category : 'dependencies' }
+{ #category : #dependencies }
 FamixTag >> isInListOfPossibleLinks: aCollection forModel: aMooseModel [
 	^ aCollection includesAny: (self allTaggedEntitiesInModel: aMooseModel)
 ]
 
-{ #category : 'dependencies' }
+{ #category : #dependencies }
 FamixTag >> isLinkedTo: aTagOrEntity dependancyDirection: aDirectionStrategy in: aMooseModel [
 	| dependencies |
 	dependencies := self allEntitiesRecursivelyIn: aMooseModel flatCollect: [ :entity | aDirectionStrategy dependenciesAtReceiverScopeOf: entity ].
@@ -373,19 +371,19 @@ FamixTag >> isLinkedTo: aTagOrEntity dependancyDirection: aDirectionStrategy in:
 		ifFalse: [ dependencies ]) includes: aTagOrEntity
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTag >> isRoot [
 	"A Root tag is a tag without parent that should be displayed at the first layer of a tree representation of a tag hierarchy."
 
 	^ self parentTag isNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTag >> isTag [
 	^ true
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 FamixTag >> mergeWith: anotherTag forModel: aModel [
 	(aModel associationsForTag: anotherTag) do: [ :aTagAssociation | aTagAssociation tag: self ].
 	anotherTag allSubTags copy
@@ -396,7 +394,7 @@ FamixTag >> mergeWith: anotherTag forModel: aModel [
 	anotherTag remove
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> mooseModel: aMooseModel [
 	self checkValidity.
 	[ "We try here to find if there is an existing tag in the model" FamixAlreadyExistTagFailure signalWithTag: (aMooseModel findTagNamed: self mooseName) ]
@@ -406,12 +404,12 @@ FamixTag >> mooseModel: aMooseModel [
 			self privateSetMooseModel: aMooseModel ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 FamixTag >> mooseModelWithoutCheck: aMooseModel [
 	^ super mooseModel: aMooseModel
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 FamixTag >> mooseName [
 	"A tag should always have a model. Thus we can remove the check in the overriden method for performances."
 
@@ -422,7 +420,7 @@ FamixTag >> mooseName [
 			mooseName := stream contents asSymbol ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 FamixTag >> mooseNameOn: aStream [
 	self parentTag
 		ifNotNil: [ :tag | 
@@ -431,24 +429,24 @@ FamixTag >> mooseNameOn: aStream [
 	aStream nextPutAll: (self name ifNil: [ #unamed ])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> name [
 	<FMProperty: #name type: #String>
 	<FMComment: 'Name of the tag'>
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> name: aString [
 	name := aString
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 FamixTag >> parentSeparator [
 	^ $>
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> parentTag [
 	<FMProperty: #parentTag type: #FamixTag opposite: #subTags>
 	<FMComment: 'Parent of the tag'>
@@ -456,7 +454,7 @@ FamixTag >> parentTag [
 	^ parentTag
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> parentTag: aParentTag [
 	(aParentTag = self or: [ self isAncestorOf: aParentTag ]) ifTrue: [ FamixTagRecursiveFailure signal ].
 
@@ -471,7 +469,7 @@ FamixTag >> parentTag: aParentTag [
 	self resetMooseName
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 FamixTag >> promoteAsRoot [
 	[ 
 	"We check if the promotion would not create a conflict in the model"
@@ -480,7 +478,7 @@ FamixTag >> promoteAsRoot [
 		do: [ parentTag := nil ]
 ]
 
-{ #category : 'removing' }
+{ #category : #removing }
 FamixTag >> remove [
 	self mooseModel
 		ifNotNil: [ :model | 
@@ -490,14 +488,14 @@ FamixTag >> remove [
 	self subTags do: #remove
 ]
 
-{ #category : 'removing' }
+{ #category : #removing }
 FamixTag >> removeAndDeleteAssociationsInModel: aMooseModel [
 	self subTags copy do: [ :aSubTag | aSubTag removeAndDeleteAssociationsInModel: aMooseModel ].
 	self deleteAssociationsInModel: aMooseModel.
 	self remove
 ]
 
-{ #category : 'removing' }
+{ #category : #removing }
 FamixTag >> removeAndPromoteChildren [
 	"This method will remove me and my children will be added to the children of my parent"
 
@@ -505,19 +503,19 @@ FamixTag >> removeAndPromoteChildren [
 	self remove
 ]
 
-{ #category : 'removing' }
+{ #category : #removing }
 FamixTag >> removeCategory: aTagCategory [
 	self categories remove: aTagCategory
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> removeFromModel [
 	^ self mooseModel
 		ifNil: [ self ]
 		ifNotNil: [ :model | model removeTaggingEntity: self ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 FamixTag >> serializedColor [
 	"Never use directly this instance variable; it is just to store the color in the model that only support string and not color type"
 
@@ -526,14 +524,14 @@ FamixTag >> serializedColor [
 	^ serializedColor
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 FamixTag >> serializedColor: aString [
 	"Never use directly this instance variable; it is just to store the color in the model that only support string and not color type"
 
 	serializedColor := aString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> setParentTagAtNil [
 	parentTag := FMMultivalueLink
 		on: self
@@ -544,12 +542,12 @@ FamixTag >> setParentTagAtNil [
 	self resetMooseName
 ]
 
-{ #category : 'ston' }
+{ #category : #ston }
 FamixTag >> stonContainSubObjects [
 	^ false
 ]
 
-{ #category : 'ston' }
+{ #category : #ston }
 FamixTag >> stonOn: stonWriter [
 	stonWriter
 		writeObject: self
@@ -566,14 +564,14 @@ FamixTag >> stonOn: stonWriter [
 										ifFalse: [ value ]) ] ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> subTagNamed: aString [
 	^ [ self findSubTagNamed: aString ]
 		on: NotFound
 		do: [ self createSubTagNamedWithoutCheck: aString ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> subTags [
 	<FMProperty: #subTags type: #FamixTag opposite: #parentTag>
 	<multivalued>
@@ -582,36 +580,36 @@ FamixTag >> subTags [
 	^ subTags
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> subTags: aCollection [
 	subTags value: aCollection
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 FamixTag >> tagEntity: anEntity [
 
 	(anEntity hasTag: self) ifFalse: [ 
 		FamixTagEntityAssociation newForEntity: anEntity tag: self ]
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 FamixTag >> tagWith: aTag [
 	FamixTagOnTagFailure signal
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> taggedEntities [
 	"Should only use that if you store tag and entities in the same model"
 
 	^ self taggedEntitiesInModel: self mooseModel
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTag >> taggedEntitiesInModel: aModel [
 	^ aModel entitiesTaggedWith: self
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 FamixTag >> toggleVisibility [
 	isHidden := isHidden not
 ]

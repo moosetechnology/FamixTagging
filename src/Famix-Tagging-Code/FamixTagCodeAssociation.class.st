@@ -14,24 +14,23 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'FamixTagCodeAssociation',
-	#superclass : 'FamixTagAssociation',
+	#name : #FamixTagCodeAssociation,
+	#superclass : #FamixTagAssociation,
 	#instVars : [
 		'start',
 		'stop',
 		'sourceAnchor'
 	],
-	#category : 'Famix-Tagging-Code',
-	#package : 'Famix-Tagging-Code'
+	#category : #'Famix-Tagging-Code'
 }
 
-{ #category : 'meta' }
+{ #category : #meta }
 FamixTagCodeAssociation class >> annotation [
 	<FMClass: #IntervalAssociation super: #FamixTagAssociation>
 	<package: #Tagging>
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 FamixTagCodeAssociation class >> newInterval: anInterval forEntity: anEntity sourceAnchor: anAnchor tag: aTAG [
 	^ (self newForEntity: anEntity tag: aTAG)
 		start: anInterval first;
@@ -40,17 +39,17 @@ FamixTagCodeAssociation class >> newInterval: anInterval forEntity: anEntity sou
 		yourself
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagCodeAssociation >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagCodeAssociation >> isCodeTagAssociation [
 	^ true
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 FamixTagCodeAssociation >> printOn: aStream [
 	super printOn: aStream.
 	aStream
@@ -61,19 +60,19 @@ FamixTagCodeAssociation >> printOn: aStream [
 		nextPut: $]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagCodeAssociation >> sourceAnchor [
 	<FMProperty: #sourceAnchor type: #FamixTSourceAnchor>
 	<FMComment: 'The tagging for an interval can point a specific source anchor if there is multiple files for an entity'>
 	^ sourceAnchor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagCodeAssociation >> sourceAnchor: anObject [
 	sourceAnchor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagCodeAssociation >> start [
 	<FMProperty: #start type: #Number>
 	<FMComment: 'the start position of tagging'>
@@ -81,12 +80,12 @@ FamixTagCodeAssociation >> start [
 	^ start
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagCodeAssociation >> start: anObject [
 	start := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagCodeAssociation >> stop [
 	<FMProperty: #stop type: #Number>
 	<FMComment: 'the stop position of tagging'>
@@ -94,7 +93,7 @@ FamixTagCodeAssociation >> stop [
 	^ stop
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagCodeAssociation >> stop: anObject [
 	stop := anObject
 ]

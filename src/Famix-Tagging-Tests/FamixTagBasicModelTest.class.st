@@ -1,14 +1,13 @@
 Class {
-	#name : 'FamixTagBasicModelTest',
-	#superclass : 'TestCase',
+	#name : #FamixTagBasicModelTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'model'
 	],
-	#category : 'Famix-Tagging-Tests',
-	#package : 'Famix-Tagging-Tests'
+	#category : #'Famix-Tagging-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 FamixTagBasicModelTest >> setUp [
 	super setUp.
 	model := FamixTagTestModel new.
@@ -16,7 +15,7 @@ FamixTagBasicModelTest >> setUp [
 	FamixTagTestClass named: 'aClass2' model: model
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testAddCompositeTag [
 	| compositeTag simpleTag |
 	simpleTag := model createTagNamed: 'student'.
@@ -25,14 +24,14 @@ FamixTagBasicModelTest >> testAddCompositeTag [
 	self assert: compositeTag subTags anyOne name equals: 'student'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testAllCategories [
 	self assertEmpty: model allTagCategories.
 	model createTagCategoryNamed: 'First'.
 	self assert: model allTagCategories size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testCategoryCreation [
 	"only one category created"
 
@@ -43,14 +42,14 @@ FamixTagBasicModelTest >> testCategoryCreation [
 	self assert: category1 name equals: 'default'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testMultiCategoryCreation [
 	model tagCategoryNamed: 'feature'.
 	model tagCategoryNamed: 'default'.
 	self assert: model allTagCategories size equals: 2
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testNoTagWithSameName [
 	| class |
 	class := model entityNamed: 'aClass1'.
@@ -61,7 +60,7 @@ FamixTagBasicModelTest >> testNoTagWithSameName [
 	self assert: model tags size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testRemoveTag [
 	| class tag |
 	class := model entityNamed: 'aClass1'.
@@ -73,7 +72,7 @@ FamixTagBasicModelTest >> testRemoveTag [
 	self assertCollection: model tags hasSameElements: {tag}
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testRemoveTagAssociations [
 	| class tagAssociation |
 	class := model entityNamed: 'aClass1'.
@@ -88,7 +87,7 @@ FamixTagBasicModelTest >> testRemoveTagAssociations [
 	self assertEmpty: class tagAssociations
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testRemoveTagFromComposite [
 	| compositeTag simpleTag |
 	simpleTag := model createTagNamed: 'student'.
@@ -98,7 +97,7 @@ FamixTagBasicModelTest >> testRemoveTagFromComposite [
 	self assertCollection: model tags hasSameElements: {compositeTag}
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testSelfTaggingException [
 	| class |
 	class := model entityNamed: 'aClass1'.
@@ -107,7 +106,7 @@ FamixTagBasicModelTest >> testSelfTaggingException [
 	self should: [ model tags first tagWithName: 'myTag' ] raise: FamixTagOnTagFailure
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testSimpleTag [
 	| class |
 	class := model entityNamed: 'aClass1'.
@@ -115,7 +114,7 @@ FamixTagBasicModelTest >> testSimpleTag [
 	self assert: class isTagged
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testTagCategory [
 	| class |
 	class := model entityNamed: 'aClass1'.
@@ -123,7 +122,7 @@ FamixTagBasicModelTest >> testTagCategory [
 	self assert: (class tags anyOne hasCategory: (model findTagCategoryNamed: 'system'))
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testTagColor [
 	self
 		assert:
@@ -133,7 +132,7 @@ FamixTagBasicModelTest >> testTagColor [
 		equals: Color red
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testTagInterval [
 	| class |
 	class := model entityNamed: 'aClass1'.
@@ -141,7 +140,7 @@ FamixTagBasicModelTest >> testTagInterval [
 	self assert: class isTagged
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testTagMultiCategories [
 	| class |
 	class := model entityNamed: 'aClass1'.
@@ -152,7 +151,7 @@ FamixTagBasicModelTest >> testTagMultiCategories [
 	self assert: (class tags anyOne hasCategory: (model findTagCategoryNamed: 'hdd'))
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 FamixTagBasicModelTest >> testTagOnTag [
 	| class |
 	class := model entityNamed: 'aClass1'.

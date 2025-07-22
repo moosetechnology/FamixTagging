@@ -1,12 +1,10 @@
 Class {
-	#name : 'FamixTagTestEntity',
-	#superclass : 'MooseEntity',
-	#category : 'Famix-Tagging-Tests-Entities-Entities',
-	#package : 'Famix-Tagging-Tests-Entities',
-	#tag : 'Entities'
+	#name : #FamixTagTestEntity,
+	#superclass : #MooseEntity,
+	#category : #'Famix-Tagging-Tests-Entities-Entities'
 }
 
-{ #category : 'meta' }
+{ #category : #meta }
 FamixTagTestEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -16,84 +14,84 @@ FamixTagTestEntity class >> annotation [
 	^ self
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTagTestEntity
 ]
 
-{ #category : 'meta' }
+{ #category : #meta }
 FamixTagTestEntity class >> metamodel [
 
 	<generated>
 	^ FamixTagTestModel metamodel
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isAccess [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isAssociation [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isAttribute [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isBehavioural [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isClass [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isInvocation [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isMethod [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isPackage [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isStructuralEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 FamixTagTestEntity >> isType [
 
 	<generated>

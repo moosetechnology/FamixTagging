@@ -1,12 +1,10 @@
 Class {
-	#name : 'ManifestFamixTagging',
-	#superclass : 'PackageManifest',
-	#category : 'Famix-Tagging-Manifest',
-	#package : 'Famix-Tagging',
-	#tag : 'Manifest'
+	#name : #ManifestFamixTagging,
+	#superclass : #PackageManifest,
+	#category : #'Famix-Tagging-Manifest'
 }
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 ManifestFamixTagging class >> shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages [
 	^ true
 ]

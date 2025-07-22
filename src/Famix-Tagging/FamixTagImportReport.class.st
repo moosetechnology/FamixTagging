@@ -14,40 +14,38 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'FamixTagImportReport',
-	#superclass : 'Object',
+	#name : #FamixTagImportReport,
+	#superclass : #Object,
 	#instVars : [
 		'missingEntities',
 		'createdTags'
 	],
-	#category : 'Famix-Tagging-ImportExport',
-	#package : 'Famix-Tagging',
-	#tag : 'ImportExport'
+	#category : #'Famix-Tagging-ImportExport'
 }
 
-{ #category : 'report' }
+{ #category : #report }
 FamixTagImportReport >> createdTag: aFamixTag [
 	self createdTags add: aFamixTag
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagImportReport >> createdTags [
 	^ createdTags
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 FamixTagImportReport >> initialize [
 	super initialize.
 	missingEntities := OrderedCollection new.
 	createdTags := OrderedCollection new
 ]
 
-{ #category : 'report' }
+{ #category : #report }
 FamixTagImportReport >> missedEntity: anEntityId [
 	self missingEntities add: anEntityId
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixTagImportReport >> missingEntities [
 	^ missingEntities
 ]

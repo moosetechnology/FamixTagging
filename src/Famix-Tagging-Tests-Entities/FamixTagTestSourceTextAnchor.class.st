@@ -1,14 +1,12 @@
 Class {
-	#name : 'FamixTagTestSourceTextAnchor',
-	#superclass : 'FamixTagTestEntity',
+	#name : #FamixTagTestSourceTextAnchor,
+	#superclass : #FamixTagTestEntity,
 	#traits : 'FamixTHasImmediateSource',
 	#classTraits : 'FamixTHasImmediateSource classTrait',
-	#category : 'Famix-Tagging-Tests-Entities-Entities',
-	#package : 'Famix-Tagging-Tests-Entities',
-	#tag : 'Entities'
+	#category : #'Famix-Tagging-Tests-Entities-Entities'
 }
 
-{ #category : 'meta' }
+{ #category : #meta }
 FamixTagTestSourceTextAnchor class >> annotation [
 
 	<FMClass: #SourceTextAnchor super: #FamixTagTestEntity>

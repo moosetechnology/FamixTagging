@@ -5,34 +5,32 @@ Description
 I am an exception that occurs if an existing tag will be in conflict after executing an operation.
 "
 Class {
-	#name : 'FamixAlreadyExistTagFailure',
-	#superclass : 'FamixTagFailure',
+	#name : #FamixAlreadyExistTagFailure,
+	#superclass : #FamixTagFailure,
 	#instVars : [
 		'existingTag'
 	],
-	#category : 'Famix-Tagging-Exceptions',
-	#package : 'Famix-Tagging',
-	#tag : 'Exceptions'
+	#category : #'Famix-Tagging-Exceptions'
 }
 
-{ #category : 'signaling' }
+{ #category : #signaling }
 FamixAlreadyExistTagFailure class >> signalWithTag: anExistingTag [
 	self new
 		existingTag: anExistingTag;
 		signal
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixAlreadyExistTagFailure >> existingTag [
 	^ existingTag
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixAlreadyExistTagFailure >> existingTag: anObject [
 	existingTag := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 FamixAlreadyExistTagFailure >> messageText [
 	^ 'Impossible to perform operation: the Tag ' , self existingTag asString , ' already exist'
 ]
