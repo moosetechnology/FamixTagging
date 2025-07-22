@@ -2,31 +2,32 @@
 Builds a FAMIX model for testing tags on moose entities
 "
 Class {
-	#name : #FamixTagMockModelBuilder,
-	#superclass : #Object,
+	#name : 'FamixTagMockModelBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Tagging-Tests'
+	#category : 'Famix-Tagging-Tests',
+	#package : 'Famix-Tagging-Tests'
 }
 
-{ #category : #'model-building' }
+{ #category : 'model-building' }
 FamixTagMockModelBuilder class >> buildComplexModel [
 
 	^ self new buildComplexModel
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagMockModelBuilder class >> buildModel [
 	^self new buildModel
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTagMockModelBuilder class >> buildModelWithoutTags [
 	^ self new simpleModel; model
 ]
 
-{ #category : #'model-building' }
+{ #category : 'model-building' }
 FamixTagMockModelBuilder >> buildCodeTag [
 	| entity |
 	entity := self entityToTag.
@@ -38,7 +39,7 @@ FamixTagMockModelBuilder >> buildCodeTag [
 		tagInterval: (10 to: 300) forEntity: entity sourceAnchor: entity sourceAnchor
 ]
 
-{ #category : #'model-building' }
+{ #category : 'model-building' }
 FamixTagMockModelBuilder >> buildComplexModel [
 
 	| package fooClass factoryClass dataAttribute dataSetter makeFooMethod tag1 tag2 |
@@ -80,14 +81,14 @@ FamixTagMockModelBuilder >> buildComplexModel [
 	^ model
 ]
 
-{ #category : #'model-building' }
+{ #category : 'model-building' }
 FamixTagMockModelBuilder >> buildModel [
 	self simpleModel.
 	self buildTags.
 	^ model
 ]
 
-{ #category : #'model-building' }
+{ #category : 'model-building' }
 FamixTagMockModelBuilder >> buildTag [
 	(FamixTag named: 'database')
 		description: 'Implements database functionality';
@@ -97,13 +98,13 @@ FamixTagMockModelBuilder >> buildTag [
 		tagEntity: self entityToTag
 ]
 
-{ #category : #'model-building' }
+{ #category : 'model-building' }
 FamixTagMockModelBuilder >> buildTags [
 	self buildCodeTag.
 	self buildTag.
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTagMockModelBuilder >> createEntitiesFor: counter [
 	(FamixTagTestClass named: 'Class' , counter asString model: model)
 		typeContainer: (FamixTagTestPackage named: 'Package' , counter asString model: model);
@@ -114,17 +115,17 @@ FamixTagMockModelBuilder >> createEntitiesFor: counter [
 				yourself)
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTagMockModelBuilder >> entityToTag [
 	^ model entityNamed: 'Package1.Class1'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTagMockModelBuilder >> model [
 	^ model
 ]
 
-{ #category : #'model-building' }
+{ #category : 'model-building' }
 FamixTagMockModelBuilder >> simpleModel [
 	model := FamixTagTestModel named: 'Tagging-Model'.
 	self
@@ -132,7 +133,7 @@ FamixTagMockModelBuilder >> simpleModel [
 		createEntitiesFor: 2
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTagMockModelBuilder >> sourceText [
 	^ '// HelloWorld.java
 

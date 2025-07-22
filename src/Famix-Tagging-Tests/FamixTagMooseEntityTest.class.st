@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixTagMooseEntityTest,
-	#superclass : #FamixTagMooseModelTest,
-	#category : #'Famix-Tagging-Tests'
+	#name : 'FamixTagMooseEntityTest',
+	#superclass : 'FamixTagMooseModelTest',
+	#category : 'Famix-Tagging-Tests',
+	#package : 'Famix-Tagging-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseEntityTest >> testHasTag [
 	| class1 tagDB |
 	class1 := model allModelClasses detect: [ :c | c name = 'Class1' ].
@@ -12,7 +13,7 @@ FamixTagMooseEntityTest >> testHasTag [
 	self assert: (class1 hasTag: tagDB ).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTagMooseEntityTest >> testHasTagNamed [
 	| class1 |
 	class1 := model allModelClasses detect: [ :c | c name = 'Class1' ].

@@ -13,22 +13,24 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FamixTagCategory,
-	#superclass : #MooseEntity,
+	#name : 'FamixTagCategory',
+	#superclass : 'MooseEntity',
 	#instVars : [
 		'markedTags',
 		'name'
 	],
-	#category : #'Famix-Tagging-Model'
+	#category : 'Famix-Tagging-Model',
+	#package : 'Famix-Tagging',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTagCategory class >> annotation [
 	<FMClass: #Category super: #MooseEntity>
 	<package: #Tagging>
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagCategory class >> fromSton: aTagStonReader [
 	| aTagCategory |
 	aTagCategory := super fromSton: aTagStonReader.
@@ -40,54 +42,54 @@ FamixTagCategory class >> fromSton: aTagStonReader [
 				yourself ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTagCategory class >> named: aString [
 	^ self new
 		name: aString;
 		yourself
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagCategory class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames \ #(#mooseName #mooseID #cache #entityAttributes #mooseModel #markedTags)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTagCategory >> addTag: aTag [
 	self markedTags add: aTag
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixTagCategory >> initialize [
 	super initialize.
 	markedTags := FMMultiMultivalueLink on: self opposite: #categories
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagCategory >> markedTags [
 	<FMProperty: #markedTags type: #FamixTag opposite: #categories> <multivalued> 
 	<FMComment: 'tags this category is marking'>
 	^ markedTags
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagCategory >> markedTags: anObject [
 	markedTags value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagCategory >> name [
 	<FMProperty: #name type: #String>
 	<FMComment: 'name of the category of the tag'>
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTagCategory >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #ston }
+{ #category : 'ston' }
 FamixTagCategory >> stonContainSubObjects [
 	^ false
 ]

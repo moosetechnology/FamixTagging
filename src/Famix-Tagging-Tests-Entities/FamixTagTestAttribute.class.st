@@ -1,12 +1,14 @@
 Class {
-	#name : #FamixTagTestAttribute,
-	#superclass : #FamixTagTestEntity,
+	#name : 'FamixTagTestAttribute',
+	#superclass : 'FamixTagTestEntity',
 	#traits : 'FamixTAttribute',
 	#classTraits : 'FamixTAttribute classTrait',
-	#category : #'Famix-Tagging-Tests-Entities-Entities'
+	#category : 'Famix-Tagging-Tests-Entities-Entities',
+	#package : 'Famix-Tagging-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTagTestAttribute class >> annotation [
 
 	<FMClass: #Attribute super: #FamixTagTestEntity>
