@@ -89,10 +89,10 @@ FamixTagMooseModelTest >> testAllTaggedEntities [
 
 	"on an entity"
 	self
-		assertCollection: (model entityNamed: 'Foo') allTaggedEntities
+		assertCollection: (model entityNamed: #'Foo-Core.Foo') allTaggedEntities
 		hasSameElements: {
-				(model entityNamed: 'Foo').
-				(model entityNamed: 'data') }
+				(model entityNamed: 'Foo-Core.Foo').
+				(model entityNamed: #'Foo-Core.Foo.data') }
 ]
 
 { #category : 'tests' }
