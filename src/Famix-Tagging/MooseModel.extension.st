@@ -18,23 +18,22 @@ MooseModel >> allTaggedEntities [
 ]
 
 { #category : '*Famix-Tagging' }
-MooseModel >> copyTag: foreignTag [
-	"create a copy of foreignTag in receiver"
+MooseModel >> copyTag: aTag [
+	"create a copy of aTag in receiver"
 
-	| myTag |
-	myTag ifNotNil: [^myTag].
+	| tagCopy |
 
-	myTag := self createTagNamed: foreignTag name.
-	myTag description: foreignTag description.
-	myTag serializedColor: foreignTag serializedColor.
-	myTag isHidden: foreignTag isHidden.
+	tagCopy := self createTagNamed: aTag name.
+	tagCopy description: aTag description.
+	tagCopy serializedColor: aTag serializedColor.
+	tagCopy isHidden: aTag isHidden.
 
-	foreignTag parentTag
-		ifNotNil: [ myTag parentTag: (self ensureTagFrom: foreignTag parentTag) ].
+	aTag parentTag
+		ifNotNil: [ tagCopy parentTag: (self ensureTagFrom: aTag parentTag) ].
 		
 	"- #categories ???"
 
-	^myTag 
+	^tagCopy 
 ]
 
 { #category : '*Famix-Tagging' }
