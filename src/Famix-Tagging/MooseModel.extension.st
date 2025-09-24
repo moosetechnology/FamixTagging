@@ -18,6 +18,48 @@ MooseModel >> allTaggedEntities [
 ]
 
 { #category : '*Famix-Tagging' }
+MooseModel >> copyTag: aTag [
+	"create a copy of aTag in receiver"
+
+	| tagCopy |
+
+	tagCopy := self createTagNamed: aTag name.
+	tagCopy description: aTag description.
+	tagCopy serializedColor: aTag serializedColor.
+	tagCopy isHidden: aTag isHidden.
+
+	aTag parentTag
+		ifNotNil: [ tagCopy parentTag: (self ensureTagFrom: aTag parentTag) ].
+		
+	"- #categories ???"
+
+	^tagCopy 
+]
+
+{ #category : '*Famix-Tagging' }
+MooseModel >> ensureTagFrom: foreignTag [
+	"if a tag with 'foreignTag name' does not exist, create it as a copy of foreignTag"
+
+	^[ self findTagNamed: foreignTag name ]
+		on: NotFound
+		do: [ self copyTag: foreignTag ]
+
+]
+
+{ #category : '*Famix-Tagging' }
+MooseModel >> importTagsFrom: otherModel [
+	"Recreate all tags from a 'foreign' model:
+	 - create the tags with same properties
+	 - try to set the tags on my entities based on the mooseName of the tagged entities in the otherModel"
+
+	otherModel allTags do: [ :foreignTag || myTag |
+		myTag := self ensureTagFrom: foreignTag.
+		(foreignTag allTaggedEntitiesInModel: otherModel) do: [ :foreignEntity |
+			self tagEntityNamed: foreignEntity mooseName with: myTag]
+	]
+]
+
+{ #category : '*Famix-Tagging' }
 MooseModel >> removeTagProperties [
 	"I am used when we remove tags to update the caches"
 
@@ -33,4 +75,13 @@ MooseModel >> removeTaggingEntity: anElement [
 	self removeTagProperties.
 	self announcer announce: (MooseEntityRemoved new entity: anElement).
 	^ anElement
+]
+
+{ #category : '*Famix-Tagging' }
+MooseModel >> tagEntityNamed: aMooseName with: myTag [
+
+	self
+		entityNamed: aMooseName
+		ifAbsent: [ "ignore" ]
+		ifPresent: [ :entity | entity tagWith:myTag ]
 ]
