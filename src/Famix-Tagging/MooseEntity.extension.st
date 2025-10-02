@@ -30,10 +30,11 @@ MooseEntity >> allTaggedEntities [
 ]
 
 { #category : '*Famix-Tagging' }
-MooseEntity >> allTaggedEntitiesIn: anOrderedCollection [ 
+MooseEntity >> allTaggedEntitiesIn: anOrderedCollection [
+
 	self isTagged ifTrue: [ anOrderedCollection add: self ].
-	self children do: [ :c | c allTaggedEntitiesIn: anOrderedCollection ].
-	^anOrderedCollection 
+	self containedEntities do: [ :c | c allTaggedEntitiesIn: anOrderedCollection ].
+	^ anOrderedCollection
 ]
 
 { #category : '*Famix-Tagging' }
