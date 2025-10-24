@@ -12,7 +12,7 @@ Class {
 FamixTagDependenciesTest >> addDependencies [
 	FamixTagTestInvocation source: self method1 target: {self method2}.
 
-	FamixTagTestAccess source: self method1 target: (model entityNamed: 'Package3::Class3.Attribute3').
+	FamixTagTestAccess source: self method1 target: (model entityNamed: 'Package3.Class3.Attribute3').
 
 	FamixTagTestInvocation source: self method2 target: {self method1}
 ]
