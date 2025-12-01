@@ -229,12 +229,12 @@ FamixTagMooseModelTest >> testExportImportChildren [
 	model addAll: (model tags detect: #isComposite) subTags.
 
 	file := FileSystem memory / 'tmp'.
-	file writeStreamDo: [ :str | model exportToMSEStream: str ].
+	file writeStreamDo: [ :str | model exportToJSONStream: str ].
 
 	importedModel := file
 		readStreamDo: [ :s | 
-			"Do not enable the checks during tag import from MSE since they'll be in a random order"
-			[ FamixTagTestModel new importFromMSEStream: s ]
+			"Do not enable the checks during tag import from JSON since they'll be in a random order"
+			[ FamixTagTestModel new importFromJSONStream: s ]
 				on: FamixTagFailure
 				do: [ :ex | ex resume ] ].
 	self assert: (importedModel tags detect: #isComposite) subTags size equals: 2
@@ -351,26 +351,23 @@ FamixTagMooseModelTest >> testTags [
 	self assert: entityTags serializedColor equals: '00FF00'
 ]
 
-{ #category : #tests }
-FamixTagMooseModelTest >> testTagsExportAndImportMSE [
+{ #category : 'tests' }
+FamixTagMooseModelTest >> testTagsExportAndImportJSON [
 
 	| importedModel interval importedTag tempFile |
-	tempFile := (FileSystem memory / 'export-test.mse') ensureCreateFile.
-	tempFile writeStreamDo: [ :stream | model exportToMSEStream: stream ].
+	tempFile := (FileSystem memory / 'export-test.json') ensureCreateFile.
+	tempFile writeStreamDo: [ :stream | model exportToJSONStream: stream ].
 
 	self assert: (model tagNamed: 'dead-code') color equals: Color red.
 
-	importedModel := tempFile readStreamDo: [ :stream |
-		                 FamixTagTestModel new importFromMSEStream: stream ].
+	importedModel := tempFile readStreamDo: [ :stream | FamixTagTestModel new importFromJSONStream: stream ].
 
 	self assert: importedModel size equals: model size.
 	self assert: importedModel codeTagAssociations size equals: 1.
 
 	interval := importedModel codeTagAssociations first.
 
-	self
-		assert: interval entity
-		equals: (self getClass1InModel: importedModel).
+	self assert: interval entity equals: (self getClass1InModel: importedModel).
 	self assert: interval tag serializedColor equals: 'FF0000'.
 	self assert: interval tag description equals: 'Not used code'.
 
@@ -380,17 +377,12 @@ FamixTagMooseModelTest >> testTagsExportAndImportMSE [
 	self assert: interval tag categories first name equals: 'bookmark'.
 	self assert: importedTag name equals: 'dead-code'.
 	self assert: importedTag description equals: 'Not used code'.
-	self
-		assert: (importedModel tagNamed: 'database') description
-		equals: 'Implements database functionality'.
-	self
-		assert:
-		(self getClass1InModel: importedModel) codeTagAssociations size
-		equals: 1.
-	self
-		assert:
-		(self getClass1InModel: importedModel) entityTagAssociations size
-		equals: 1
+	self assert: (importedModel tagNamed: 'database') description equals: 'Implements database functionality'.
+
+	(self getClass1InModel: importedModel) codeTagAssociations traceCr.
+	self assert: (self getClass1InModel: importedModel) codeTagAssociations size equals: 1.
+
+	self assert: (self getClass1InModel: importedModel) entityTagAssociations size equals: 1
 ]
 
 { #category : #tests }

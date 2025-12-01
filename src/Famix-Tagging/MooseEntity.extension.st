@@ -11,6 +11,7 @@ MooseEntity >> allEntityTagAssociations [
 MooseEntity >> allTagAssociations [
 	<FMProperty: #allTagAssociations type: #FamixTagAssociation opposite: #entity>
 	<multivalued>
+	<derived>
 	<FMComment: 'All the tag associations linking this entity to a Tag'>
 	^ self attributeAt: #allTagAssociations ifAbsentPut: [ FMMultivalueLink on: self opposite: #entity: ]
 ]
