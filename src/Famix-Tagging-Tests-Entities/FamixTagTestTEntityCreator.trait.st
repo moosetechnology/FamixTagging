@@ -1,6 +1,8 @@
 "
 This trait is used by Famix models.
 It provides an API for creating entities and adding them to the model.
+
+
 "
 Trait {
 	#name : 'FamixTagTestTEntityCreator',
@@ -12,15 +14,16 @@ Trait {
 { #category : 'meta' }
 FamixTagTestTEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Tagging-Tests-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTagTestAccess new
 ]
@@ -28,6 +31,7 @@ FamixTagTestTEntityCreator >> newAccess [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTagTestAttribute new
 ]
@@ -35,6 +39,7 @@ FamixTagTestTEntityCreator >> newAttribute [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newAttributeNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTagTestAttribute named: aName)
 ]
@@ -42,6 +47,7 @@ FamixTagTestTEntityCreator >> newAttributeNamed: aName [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTagTestClass new
 ]
@@ -49,6 +55,7 @@ FamixTagTestTEntityCreator >> newClass [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newClassNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTagTestClass named: aName)
 ]
@@ -56,6 +63,7 @@ FamixTagTestTEntityCreator >> newClassNamed: aName [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTagTestInvocation new
 ]
@@ -63,6 +71,7 @@ FamixTagTestTEntityCreator >> newInvocation [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTagTestMethod new
 ]
@@ -70,6 +79,7 @@ FamixTagTestTEntityCreator >> newMethod [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newMethodNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTagTestMethod named: aName)
 ]
@@ -77,6 +87,7 @@ FamixTagTestTEntityCreator >> newMethodNamed: aName [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTagTestPackage new
 ]
@@ -84,6 +95,7 @@ FamixTagTestTEntityCreator >> newPackage [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newPackageNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTagTestPackage named: aName)
 ]
@@ -91,6 +103,7 @@ FamixTagTestTEntityCreator >> newPackageNamed: aName [
 { #category : 'entity creation' }
 FamixTagTestTEntityCreator >> newSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTagTestSourceTextAnchor new
 ]

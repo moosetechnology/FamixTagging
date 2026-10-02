@@ -9,16 +9,17 @@ Class {
 { #category : 'meta' }
 FamixTagTestEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Tagging-Tests-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }
 FamixTagTestEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTagTestEntity
 ]
@@ -26,13 +27,31 @@ FamixTagTestEntity class >> isAbstract [
 { #category : 'meta' }
 FamixTagTestEntity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTagTestModel metamodel
 ]
 
 { #category : 'testing' }
+FamixTagTestEntity >> canBeStub [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTagTestEntity >> hasImmediateSource [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTagTestEntity >> isAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -40,6 +59,7 @@ FamixTagTestEntity >> isAccess [
 { #category : 'testing' }
 FamixTagTestEntity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -47,6 +67,7 @@ FamixTagTestEntity >> isAssociation [
 { #category : 'testing' }
 FamixTagTestEntity >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -54,6 +75,7 @@ FamixTagTestEntity >> isAttribute [
 { #category : 'testing' }
 FamixTagTestEntity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -61,6 +83,7 @@ FamixTagTestEntity >> isBehavioural [
 { #category : 'testing' }
 FamixTagTestEntity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -68,6 +91,7 @@ FamixTagTestEntity >> isClass [
 { #category : 'testing' }
 FamixTagTestEntity >> isInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -75,6 +99,7 @@ FamixTagTestEntity >> isInvocation [
 { #category : 'testing' }
 FamixTagTestEntity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -82,6 +107,15 @@ FamixTagTestEntity >> isMethod [
 { #category : 'testing' }
 FamixTagTestEntity >> isPackage [
 
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTagTestEntity >> isQueryable [
+
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -89,6 +123,7 @@ FamixTagTestEntity >> isPackage [
 { #category : 'testing' }
 FamixTagTestEntity >> isStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -96,6 +131,7 @@ FamixTagTestEntity >> isStructuralEntity [
 { #category : 'testing' }
 FamixTagTestEntity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
