@@ -575,10 +575,10 @@ FamixTag >> subTagNamed: aString [
 
 { #category : 'accessing' }
 FamixTag >> subTags [
+
 	<FMProperty: #subTags type: #FamixTag opposite: #parentTag>
 	<multivalued>
 	<FMComment: 'Sub tags of this composite tag.'>
-	<derived>
 	^ subTags
 ]
 
