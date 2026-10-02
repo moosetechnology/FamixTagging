@@ -95,7 +95,7 @@ FamixTaggingDependencyDetectorTest >> p3 [
 { #category : 'running' }
 FamixTaggingDependencyDetectorTest >> setUp [
 	super setUp.
-	model := FamixTest3Model new.
+	model := FamixTest2Model new.
 	1 to: 3 do: [ :number | self createTestEntities: number ].
 	FamixTest2Invocation source: self m1 target: {self m2} model: model.
 	FamixTest2Invocation source: self m2 target: {self m1} model: model.
