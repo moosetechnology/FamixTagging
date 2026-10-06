@@ -57,10 +57,10 @@ FamixTaggingDependencyDetectorTest >> createTags [
 { #category : 'running' }
 FamixTaggingDependencyDetectorTest >> createTestEntities: counter [
 	| package class method attribute |
-	package := FamixTest3Package named: 'package' , counter asString model: model.
-	class := FamixTest3Class named: 'Class' , counter asString model: model.
-	method := FamixTest3Method named: 'method' , counter asString model: model.
-	attribute := FamixTest3Attribute named: 'attribute' , counter asString model: model.
+	package := FamixTest2Package named: 'package' , counter asString model: model.
+	class := FamixTest2Class named: 'Class' , counter asString model: model.
+	method := FamixTest2Method named: 'method' , counter asString model: model.
+	attribute := FamixTest2Attribute named: 'attribute' , counter asString model: model.
 
 	package addChildEntity: class.
 	method parentType: class.
@@ -95,11 +95,11 @@ FamixTaggingDependencyDetectorTest >> p3 [
 { #category : 'running' }
 FamixTaggingDependencyDetectorTest >> setUp [
 	super setUp.
-	model := FamixTest3Model new.
+	model := FamixTest2Model new.
 	1 to: 3 do: [ :number | self createTestEntities: number ].
-	FamixTest3Invocation source: self m1 target: {self m2} model: model.
-	FamixTest3Invocation source: self m2 target: {self m1} model: model.
-	FamixTest3Access source: self m1 target: self a3
+	FamixTest2Invocation source: self m1 target: {self m2} model: model.
+	FamixTest2Invocation source: self m2 target: {self m1} model: model.
+	FamixTest2Access source: self m1 target: self a3
 ]
 
 { #category : 'helpers' }
